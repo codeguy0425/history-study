@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S1 History Revision 7 - Hong Kong Traditional Culture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f14;
+    --bg-card: #181822;
+    --bg-hover: #22223a;
+    --border: #2a2a42;
+    --text: #e8e6e3;
+    --text-muted: #9a98a6;
+    --gold: #d4a84b;
+    --gold-dim: rgba(212, 168, 75, 0.15);
+    --blue: #5b9bd5;
+    --blue-dim: rgba(91, 155, 213, 0.12);
+    --red: #c44a4a;
+    --green: #4a9c6d;
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Inter', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    font-size: 15px;
+  }
+
+  header {
+    height: 56px;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    flex-shrink: 0;
+    z-index: 10;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand svg { color: var(--gold); }
+  .brand h1 {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .brand h1 span { color: var(--gold); }
+  .brand .badge {
+    font-size: 0.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+  .header-right { display: flex; align-items: center; gap: 10px; }
+  .btn-icon {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    width: 34px;
+    height: 34px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    font-size: 0.85rem;
+  }
+  .btn-icon:hover { background: var(--bg-hover); color: var(--gold); border-color: var(--gold); }
+
+  .app { flex: 1; display: flex; overflow: hidden; }
+  .slide-area { flex: 1; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+  .slide-viewport {
+    flex: 1;
+    overflow-y: auto;
+    padding: 32px 48px;
+    display: flex;
+    justify-content: center;
+    scroll-behavior: smooth;
+  }
+  .slide-viewport::-webkit-scrollbar { width: 4px; }
+  .slide-viewport::-webkit-scrollbar-track { background: transparent; }
+  .slide-viewport::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .slide { display: none; width: 100%; max-width: 860px; animation: fadeUp 0.35s ease both; }
+  .slide.active { display: block; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .slide-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .slide-title {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .slide-title::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: var(--gold);
+  }
+  .slide-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: rgba(255,255,255,0.08); }
+  .card-gold { border-left: 3px solid var(--gold); }
+  .card-blue { border-left: 3px solid var(--blue); }
+  .card-red { border-left: 3px solid var(--red); }
+  .card-green { border-left: 3px solid var(--green); }
+  .card h3 { font-family: var(--font-display); font-size: 1.1rem; margin-bottom: 6px; color: var(--gold); }
+  .card h4 { font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; color: var(--text); }
+  .card p, .card li { font-size: 0.85rem; line-height: 1.65; color: var(--text-muted); }
+  .card ul { list-style: none; padding: 0; }
+  .card ul li::before { content: '▸ '; color: var(--gold); }
+  .card ul li { padding: 2px 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+
+  .tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-bottom: 8px;
+  }
+  .tag-gold { background: var(--gold-dim); color: var(--gold); }
+  .tag-blue { background: var(--blue-dim); color: var(--blue); }
+  .tag-red { background: rgba(196, 74, 74, 0.12); color: var(--red); }
+  .tag-green { background: rgba(74, 156, 109, 0.12); color: var(--green); }
+
+  .exam-tip {
+    background: var(--gold-dim);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-top: 12px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .exam-tip strong { color: var(--gold); }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+    margin: 12px 0;
+  }
+  .compare-table th {
+    background: var(--bg-card);
+    padding: 8px 10px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--border);
+    color: var(--text-muted);
+  }
+  .compare-table td {
+    padding: 7px 10px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-muted);
+    vertical-align: top;
+  }
+  .compare-table td:first-child { font-weight: 600; color: var(--text); }
+  .compare-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  .evi-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  .evi-table th {
+    background: var(--bg-card);
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--border);
+    color: var(--gold);
+  }
+  .evi-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+  .evi-table td:first-child { font-weight: 600; color: var(--text); }
+
+  .nav-bar {
+    height: 60px;
+    background: var(--bg-card);
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    flex-shrink: 0;
+  }
+  .nav-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+  }
+  .nav-btn:hover:not(:disabled) { border-color: var(--gold); color: var(--gold); }
+  .nav-btn:disabled { opacity: 0.3; cursor: default; }
+  .nav-info { font-size: 0.7rem; color: var(--text-muted); font-weight: 500; }
+
+  .worksheet {
+    width: 0;
+    overflow: hidden;
+    background: var(--bg-card);
+    border-left: 1px solid var(--border);
+    transition: width 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+  }
+  .worksheet.open { width: 360px; }
+  .ws-header {
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--gold);
+  }
+  .ws-header button { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1rem; }
+  .ws-body {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #0a0a0e;
+    position: relative;
+  }
+  .ws-body img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    cursor: grab;
+    transition: transform 0.1s;
+  }
+  .ws-body img:active { cursor: grabbing; }
+  .ws-footer {
+    padding: 8px 16px;
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-align: center;
+    border-top: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 900px) {
+    .slide-viewport { padding: 24px 20px; }
+    .slide-title { font-size: 1.6rem; }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .brand .badge { display: none; }
+    .brand h1 { font-size: 0.95rem; }
+    header { padding: 0 12px; }
+  }
+  @media (max-width: 640px) {
+    .slide-viewport { padding: 16px 14px; }
+    .slide-title { font-size: 1.3rem; margin-bottom: 14px; padding-bottom: 8px; }
+    .slide-subtitle { font-size: 0.8rem; margin-bottom: 14px; }
+    .card { padding: 14px 16px; margin-bottom: 12px; }
+    .card h3 { font-size: 0.95rem; }
+    .card p, .card li { font-size: 0.78rem; }
+    .compare-table { font-size: 0.68rem; }
+    .compare-table th, .compare-table td { padding: 5px 6px; }
+    .nav-bar { height: 50px; padding: 0 12px; }
+    .nav-btn { font-size: 0.7rem; padding: 6px 10px; }
+    .nav-info { font-size: 0.6rem; }
+    .exam-tip { font-size: 0.72rem; padding: 10px 12px; }
+    header { height: 46px; }
+    .header-right span { display: none; }
+    .btn-icon { width: 30px; height: 30px; font-size: 0.75rem; }
+    .worksheet.open { width: 100%; position: absolute; inset: 0; z-index: 20; }
+  }
+  @media (max-height: 500px) and (orientation: landscape) {
+    header { height: 38px; padding: 0 10px; }
+    .brand svg { width: 16px; height: 16px; }
+    .brand h1 { font-size: 0.8rem; }
+    .btn-icon { width: 26px; height: 26px; font-size: 0.65rem; }
+    .slide-viewport { padding: 10px 16px; align-items: flex-start; }
+    .slide-title { font-size: 1.1rem; margin-bottom: 8px; padding-bottom: 6px; border-bottom-width: 1px; }
+    .slide-title::after { width: 30px; height: 1px; }
+    .slide-label { font-size: 0.55rem; margin-bottom: 2px; }
+    .slide-subtitle { font-size: 0.7rem; margin-bottom: 8px; }
+    .card { padding: 8px 12px; margin-bottom: 6px; border-radius: 5px; }
+    .card h3 { font-size: 0.8rem; margin-bottom: 3px; }
+    .card h4 { font-size: 0.72rem; }
+    .card p, .card li { font-size: 0.68rem; line-height: 1.45; }
+    .card ul li { padding: 1px 0; font-size: 0.68rem; }
+    .tag { font-size: 0.5rem; padding: 1px 5px; margin-bottom: 4px; }
+    .exam-tip { font-size: 0.65rem; padding: 6px 10px; margin-top: 6px; }
+    .compare-table { font-size: 0.56rem; margin: 6px 0; }
+    .compare-table th { padding: 3px 4px; font-size: 0.56rem; }
+    .compare-table td { padding: 2px 4px; }
+    .nav-bar { height: 38px; padding: 0 10px; }
+    .nav-btn { font-size: 0.6rem; padding: 4px 8px; }
+    .nav-info { font-size: 0.55rem; }
+    .worksheet.open { width: 60%; position: absolute; right: 0; top: 0; bottom: 0; z-index: 20; }
+    .ws-header { height: 34px; padding: 0 10px; font-size: 0.6rem; }
+    .ws-footer { font-size: 0.5rem; padding: 4px 10px; }
+    .grid-2, .grid-3 { grid-template-columns: 1fr 1fr; gap: 8px; }
+    body { overflow: auto; }
+    .app { overflow: auto; }
+    .slide-area { overflow: visible; }
+    .slide-viewport { overflow: visible; }
+  }
+  @media (max-height: 380px) and (orientation: landscape) {
+    .slide-viewport { padding: 6px 12px; }
+    .slide-title { font-size: 0.95rem; margin-bottom: 5px; padding-bottom: 4px; }
+    .slide-subtitle { font-size: 0.6rem; margin-bottom: 5px; }
+    .card { padding: 5px 8px; margin-bottom: 4px; }
+    .card p, .card li { font-size: 0.6rem; line-height: 1.35; }
+    .card h3 { font-size: 0.72rem; }
+    .exam-tip { font-size: 0.55rem; padding: 4px 8px; }
+    .nav-bar { height: 32px; }
+    .nav-btn { font-size: 0.55rem; padding: 3px 6px; }
+    .nav-info { font-size: 0.5rem; }
+    .compare-table { font-size: 0.48rem; }
+    .compare-table th, .compare-table td { padding: 2px 3px; }
+    header { height: 32px; }
+    .brand h1 { font-size: 0.7rem; }
+    .btn-icon { width: 22px; height: 22px; font-size: 0.55rem; }
+    .tag { font-size: 0.45rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 10h16"/><path d="M12 2 2 6v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6z"/><path d="M8 10v10"/><path d="M12 10v10"/><path d="M16 10v10"/></svg>
+    <div>
+      <h1>HK Traditional Culture <span>· Revision 7</span></h1>
+    </div>
+    <span class="badge">S1 History · HK</span>
+  </div>
+  <div class="header-right">
+    <span style="font-size:0.65rem;color:var(--text-muted);">← →</span>
+    <button class="btn-icon" id="themeBtn" title="Toggle theme">☀</button>
+    <button class="btn-icon" id="wsToggle" title="Worksheet">📄</button>
+  </div>
+</header>
+
+<div class="app">
+
+  <div class="slide-area">
+    <div class="slide-viewport" id="viewport">
+
+      <!-- SLIDE 1: TITLE -->
+      <div class="slide active">
+        <div style="text-align:center;padding:40px 0 20px;">
+          <div style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-bottom:16px;">S1 World History · Final Exam Revision</div>
+          <h2 style="font-family:var(--font-display);font-size:2.4rem;font-weight:700;line-height:1.1;margin-bottom:10px;">Hong Kong Traditional<br>Culture</h2>
+          <p style="font-size:1.1rem;color:var(--blue);margin-bottom:24px;">Four Major Dialect Groups · Villages & Houses · Beliefs & Customs · Cultural Links with Mainland China</p>
+          <div class="card card-gold" style="text-align:left;">
+            <h3>👨‍🏫 Exam Preparation Tips</h3>
+            <ul>
+              <li><strong>Know the 4 groups:</strong> Cantonese/Punti, Hakka, Fuklo, Boat people — their origins, dialects, settlements, and livelihoods</li>
+              <li><strong>Five Great Clans:</strong> Tang, Hau, Pang, Liu, Man — why were they powerful?</li>
+              <li><strong>Walled villages:</strong> Compare Punti vs Hakka walled villages. Know the functions of ancestral halls and study halls</li>
+              <li><strong>Beliefs:</strong> Ancestral worship, Tin Hau, Kwan Tai — which groups worshipped which gods?</li>
+              <li><strong>HK & China cultural relations:</strong> Evidence from architecture, education, and beliefs/customs</li>
+              <li>Click <strong>📄</strong> to view worksheet pages alongside the slides</li>
+            </ul>
+          </div>
+          <button class="nav-btn" style="margin:20px auto 0;border-color:var(--gold);color:var(--gold);" onclick="go(1)">Begin Revision →</button>
+        </div>
+      </div>
+
+      <!-- SLIDE 2: FOUR MAJOR DIALECT GROUPS -->
+      <div class="slide">
+        <div class="slide-label">Dialect Groups</div>
+        <h2 class="slide-title">The Four Major Dialect Groups</h2>
+        <p class="slide-subtitle">Between the 10th and 17th centuries, four major groups from Mainland China settled in Hong Kong. Each had its own dialect, origin, and way of life.</p>
+
+        <table class="compare-table">
+          <tr>
+            <th style="width:16%;">Group</th>
+            <th style="width:16%;">Arrived</th>
+            <th style="width:16%;">Dialect</th>
+            <th style="width:20%;">Origin</th>
+            <th style="width:30%;">Settlement in HK</th>
+          </tr>
+          <tr>
+            <td style="color:var(--gold);font-weight:600;">Cantonese / Punti (本地人)</td>
+            <td>10th c.</td>
+            <td>Wai Tau (圍頭話)</td>
+            <td>Guangdong (廣東)</td>
+            <td>Fertile plains in northern New Territories</td>
+          </tr>
+          <tr>
+            <td style="color:var(--blue);font-weight:600;">Hakka (客家人)</td>
+            <td>17th c.</td>
+            <td>Hakka</td>
+            <td>Guangdong & Fujian</td>
+            <td>Distant, infertile regions in NT</td>
+          </tr>
+          <tr>
+            <td style="color:var(--green);font-weight:600;">Fuklo (福佬人)</td>
+            <td>11th c.</td>
+            <td>Minnan (閩南話)</td>
+            <td>Fujian & east Guangdong</td>
+            <td>Eastern waters of HK — most lived on boats</td>
+          </tr>
+          <tr>
+            <td style="color:var(--red);font-weight:600;">Boat People (水上人)</td>
+            <td>Unclear</td>
+            <td>Cantonese & Minnan</td>
+            <td>Coast of Fujian & Guangdong</td>
+            <td>Coast of NT & HK Island — most lived on boats</td>
+          </tr>
+        </table>
+
+        <div class="exam-tip"><strong>📝 Exam Note:</strong> All four groups came from <strong>Mainland China</strong> (mainly Guangdong and Fujian). Their daily lives shared much with people in the Mainland. HK has been part of <strong>China's territory since the Qin Dynasty (214 BC)</strong>.</div>
+      </div>
+
+      <!-- SLIDE 3: LIVELIHOODS -->
+      <div class="slide">
+        <div class="slide-label">Livelihoods</div>
+        <h2 class="slide-title">How Each Group Made a Living</h2>
+        <p class="slide-subtitle">The four dialect groups developed different livelihoods based on where they settled.</p>
+
+        <table class="compare-table">
+          <tr>
+            <th>Group</th>
+            <th>Settlement & Land</th>
+            <th>Livelihood (謀生)</th>
+          </tr>
+          <tr>
+            <td style="color:var(--gold);font-weight:600;">Cantonese / Punti</td>
+            <td>Fertile plains in northern NT</td>
+            <td>(1) Farmed<br>(2) Set up markets/bazaars (市集) to sell farm products</td>
+          </tr>
+          <tr>
+            <td style="color:var(--blue);font-weight:600;">Hakka</td>
+            <td>Distant, infertile regions in NT</td>
+            <td>(1) Farmed (2) Salt making (3) Brick making (4) Quarrying (採石) (5) Stone cutting (6) Set up markets</td>
+          </tr>
+          <tr>
+            <td style="color:var(--green);font-weight:600;">Fuklo</td>
+            <td>Eastern waters — most lived on boats</td>
+            <td>(1) Oyster farming (2) Pearl diving (3) Shipping goods (航運)</td>
+          </tr>
+          <tr>
+            <td style="color:var(--red);font-weight:600;">Boat People</td>
+            <td>Coast of NT & HK Island — most lived on boats</td>
+            <td>(1) Oyster farming (2) Pearl diving (3) Shipping goods</td>
+          </tr>
+        </table>
+
+        <div class="grid-2" style="margin-top:12px;">
+          <div class="card card-blue">
+            <h4>🌾 Land-based groups</h4>
+            <p>Cantonese/Punti and Hakka lived on <strong>land</strong> and relied on <strong>farming</strong> and related industries. The Cantonese had the best land; the Hakka made do with less fertile areas through diverse occupations.</p>
+          </div>
+          <div class="card card-green">
+            <h4>🌊 Sea-based groups</h4>
+            <p>Fuklo and Boat people lived mainly on <strong>boats</strong> and relied on the <strong>sea</strong> for their livelihoods: oyster farming, pearl diving, and shipping.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 4: CANTONESE/PUNTI & THE FIVE GREAT CLANS -->
+      <div class="slide">
+        <div class="slide-label">Power & Influence</div>
+        <h2 class="slide-title">The Cantonese/Punti & the Five Great Clans</h2>
+        <p class="slide-subtitle">Among the four groups, the Cantonese/Punti were the wealthiest and most powerful. Here's why.</p>
+
+        <div class="card card-gold">
+          <span class="tag tag-gold">Five Great Clans</span>
+          <h4>🏛️ 新界五大族</h4>
+          <p>A <strong>clan (族)</strong> is a large group of families with the <strong>same ancestor</strong> and surname. The Cantonese/Punti had about 40 clans, but five were the most powerful: <strong>Tang (鄧)</strong>, <strong>Hau (侯)</strong>, <strong>Pang (彭)</strong>, <strong>Liu (廖)</strong>, and <strong>Man (文)</strong>.</p>
+        </div>
+
+        <div class="card card-blue">
+          <span class="tag tag-blue">Why were they powerful?</span>
+          <h4>💪 Three Reasons for Cantonese/Punti Power</h4>
+          <ul>
+            <li><strong>Earliest arrival:</strong> They were the first group to settle in HK (10th c.), so they claimed the <strong>fertile land</strong> in the New Territories, ideal for farming.</li>
+            <li><strong>Economic power:</strong> They owned lots of land (became rich landlords) and controlled many <strong>markets (bazaars)</strong> in the New Territories, giving them great economic power.</li>
+            <li><strong>Education → Officials:</strong> They used ancestral halls and study halls as <strong>schools</strong>. Members passed the <strong>civil service examination</strong> and became <strong>officials (官員)</strong>, enhancing their power and influence.</li>
+          </ul>
+        </div>
+
+        <div class="exam-tip"><strong>📝 Exam Question:</strong> "Why were the Cantonese/Punti wealthier and more powerful than other dialect groups?" Answer with the <strong>three reasons</strong> above: earliest arrival → fertile land, economic power (land + markets), education → scholarly titles → officials.</div>
+      </div>
+
+      <!-- SLIDE 5: HOUSES & BUILDINGS -->
+      <div class="slide">
+        <div class="slide-label">Architecture</div>
+        <h2 class="slide-title">Houses & Buildings of Early Hong Kong</h2>
+        <p class="slide-subtitle">Land-based groups (Punti, Hakka) built walled villages; sea-based groups (Fuklo, Boat people) lived on boats or in stilt houses.</p>
+
+        <div class="grid-2">
+          <div class="card card-gold">
+            <span class="tag tag-gold">Walled Villages (圍村)</span>
+            <h4>🏘️ Punti vs Hakka</h4>
+            <p>During the Ming and Qing dynasties, <strong>pirates and bandits</strong> threatened villages. Villagers built <strong>walls</strong> and dug <strong>moats (護城河)</strong> for protection. About <strong>70 walled villages</strong> remain today, mostly in Yuen Long, Kam Tin, Sheung Shui, and Fanling.</p>
+            <ul>
+              <li><strong>Punti walled villages:</strong> Built by the Five Great Clans — <strong>well-planned</strong>, larger scale</li>
+              <li><strong>Hakka walled villages:</strong> <strong>Smaller</strong> in scale compared to Punti villages</li>
+            </ul>
+          </div>
+          <div>
+            <div class="card card-blue">
+              <span class="tag tag-blue">Ancestral Halls (祠堂)</span>
+              <h4>🏛️ Functions</h4>
+              <ul>
+                <li>Worship ancestors — housed <strong>soul tablets</strong></li>
+                <li>Village chief & male elders discussed <strong>village affairs</strong></li>
+                <li>Heard <strong>cases</strong> (審案)</li>
+                <li>Held <strong>celebrations</strong></li>
+                <li>Used as <strong>schools</strong></li>
+              </ul>
+            </div>
+            <div class="card card-green">
+              <span class="tag tag-green">Study Halls (書室)</span>
+              <h4>📚 Functions</h4>
+              <ul>
+                <li>Used as <strong>schools</strong> for children</li>
+                <li>Some also used for <strong>ancestral worship</strong></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-red">
+          <span class="tag tag-red">Boat People & Fuklo</span>
+          <h4>🚤 Stilt Houses (棚屋)</h4>
+          <p>The boat people and Fuklo lived on <strong>boats</strong>. Later, some moved near the <strong>coast</strong> and built <strong>stilt houses</strong> using wood, grasses, and iron sheets. The largest concentration of stilt houses is in <strong>Tai O</strong>.</p>
+        </div>
+      </div>
+
+      <!-- SLIDE 6: BELIEFS & CUSTOMS -->
+      <div class="slide">
+        <div class="slide-label">Culture</div>
+        <h2 class="slide-title">Beliefs, Customs & Festivals</h2>
+        <p class="slide-subtitle">The four groups kept traditional Chinese beliefs, but their different backgrounds and lifestyles created Hong Kong's multicultural tradition.</p>
+
+        <div class="grid-3">
+          <div class="card card-gold">
+            <span class="tag tag-gold">Ancestral Worship</span>
+            <h4>🙏 拜祖先</h4>
+            <p>All early residents kept this <strong>Chinese tradition</strong>. They held regular ceremonies to worship their ancestors.</p>
+          </div>
+          <div class="card card-blue">
+            <span class="tag tag-blue">Popular Religion</span>
+            <h4>🏯 民間宗教</h4>
+            <ul>
+              <li>All groups followed Chinese popular religion (e.g. <strong>Kwan Tai / 關帝</strong>)</li>
+              <li>Boat people & Fuklo mainly worshipped <strong>sea gods</strong>: <strong>Tin Hau (天后)</strong> and <strong>Hung Shing (洪聖)</strong> for safe sea journeys</li>
+              <li>Cantonese & Hakka also worshipped Tin Hau</li>
+            </ul>
+          </div>
+          <div class="card card-green">
+            <span class="tag tag-green">Festivals</span>
+            <h4>🎉 節日</h4>
+            <ul>
+              <li><strong>Family reunion:</strong> Chinese New Year, Mid-Autumn Festival, Winter Solstice (冬至)</li>
+              <li><strong>Ancestral worship:</strong> Ching Ming Festival, Chung Yeung Festival</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card card-gold">
+          <h4>🌏 Multi-Cultural Tradition</h4>
+          <p>The four groups all kept traditional <strong>Chinese</strong> beliefs and customs, but their different backgrounds and lifestyles meant that Hong Kong developed a <strong>multi-cultural tradition (多元文化傳統)</strong>.</p>
+        </div>
+
+        <div class="exam-tip"><strong>📝 Exam Note:</strong> Boat people and Fuklo worshipped <strong>sea gods</strong> (Tin Hau, Hung Shing) because their lives depended on the sea. This is a common link question!</div>
+      </div>
+
+      <!-- SLIDE 7: CULTURAL RELATIONS HK & CHINA -->
+      <div class="slide">
+        <div class="slide-label">Conclusion</div>
+        <h2 class="slide-title">Cultural Relations: Hong Kong & Mainland China</h2>
+        <p class="slide-subtitle">How similar was Hong Kong's traditional culture to that of Mainland China? Evidence from three areas.</p>
+
+        <table class="evi-table">
+          <tr><th style="width:22%;">Area</th><th>Cultural Relation</th><th>Evidence</th></tr>
+          <tr>
+            <td style="color:var(--gold);font-weight:600;">🏘️ Architecture</td>
+            <td>Similar</td>
+            <td><strong>Walled villages</strong> with walls, moats, and watchtowers can be found in both <strong>Hong Kong and Guangdong</strong>.</td>
+          </tr>
+          <tr>
+            <td style="color:var(--blue);font-weight:600;">📚 Education</td>
+            <td>Similar</td>
+            <td>Boys in both HK and China were taught <strong>Chinese classics, history, Confucianism (儒家思想), and calligraphy (書法)</strong>. Both hoped children would pass the <strong>civil service examination</strong> and become <strong>officials</strong>.</td>
+          </tr>
+          <tr>
+            <td style="color:var(--green);font-weight:600;">🙏 Beliefs & Customs</td>
+            <td>Similar</td>
+            <td>Both worshipped their <strong>ancestors</strong>. Both shared similar festivals (e.g. <strong>Chinese New Year, Mid-Autumn Festival</strong>).</td>
+          </tr>
+        </table>
+
+        <div class="card card-gold">
+          <h4>📝 Conclusion</h4>
+          <p>As Hong Kong shared <strong>similar traditional architecture, education, beliefs, and customs</strong> with Mainland China, the <strong>cultural relations</strong> between Hong Kong and the Mainland were <strong>very close</strong>.</p>
+        </div>
+
+        <div class="exam-tip"><strong>📝 DBQ Strategy:</strong> This is a typical <strong>Data-Based Question (DBQ)</strong> — you are given evidence and asked to draw a conclusion. Always state the relation (similar), then give <strong>specific evidence</strong> from each area, then state the conclusion (close cultural relations).</div>
+      </div>
+
+    </div>
+
+    <div class="nav-bar">
+      <button class="nav-btn" id="prevBtn" onclick="prev()">← Previous</button>
+      <span class="nav-info" id="slideInfo">Slide 1 of 7</span>
+      <button class="nav-btn" id="nextBtn" onclick="next()">Next →</button>
+    </div>
+  </div>
+
+  <div class="worksheet" id="wsPanel">
+    <div class="ws-header">
+      <span>📄 Worksheet Reference</span>
+      <button onclick="toggleWs()">✕</button>
+    </div>
+    <div class="ws-body">
+      <img id="wsImg" src="revision%207/page1.jpeg" alt="Worksheet">
+    </div>
+    <div class="ws-footer" id="wsLabel">Page 1</div>
+  </div>
+
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let cur = 0;
+
+  function go(i) { cur = i; update(); }
+  function next() { if (cur < slides.length - 1) { cur++; update(); } }
+  function prev() { if (cur > 0) { cur--; update(); } }
+  function update() {
+    slides.forEach((s, i) => s.classList.toggle('active', i === cur));
+    document.getElementById('prevBtn').disabled = cur === 0;
+    document.getElementById('nextBtn').disabled = cur === slides.length - 1;
+    document.getElementById('slideInfo').textContent = `Slide ${cur + 1} of ${slides.length}`;
+    document.getElementById('viewport').scrollTop = 0;
+    updateWs();
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+  });
+
+  const wsMap = [
+    'page1.jpeg', 'page1.jpeg', 'page2.jpeg', 'page3.jpeg',
+    'page4.jpeg', 'page5.jpeg', 'page6.jpeg'
+  ];
+  const wsLabels = [
+    'Cover', 'Four Dialect Groups', 'Livelihoods',
+    'Five Great Clans', 'Houses & Buildings', 'Beliefs & Customs',
+    'HK & China Cultural Relations'
+  ];
+
+  function updateWs() {
+    document.getElementById('wsImg').src = `revision%207/${wsMap[cur] || 'page1.jpeg'}`;
+    document.getElementById('wsLabel').textContent = wsLabels[cur] || 'Reference';
+  }
+
+  function toggleWs() {
+    document.getElementById('wsPanel').classList.toggle('open');
+  }
+  document.getElementById('wsToggle').onclick = toggleWs;
+
+  let dark = true;
+  document.getElementById('themeBtn').onclick = () => {
+    dark = !dark;
+    const root = document.documentElement;
+    if (dark) {
+      root.style.setProperty('--bg', '#0f0f14');
+      root.style.setProperty('--bg-card', '#181822');
+      root.style.setProperty('--bg-hover', '#22223a');
+      root.style.setProperty('--border', '#2a2a42');
+      root.style.setProperty('--text', '#e8e6e3');
+      root.style.setProperty('--text-muted', '#9a98a6');
+      document.getElementById('themeBtn').textContent = '☀';
+    } else {
+      root.style.setProperty('--bg', '#f5f3ef');
+      root.style.setProperty('--bg-card', '#ffffff');
+      root.style.setProperty('--bg-hover', '#f0ede8');
+      root.style.setProperty('--border', '#d6d2ca');
+      root.style.setProperty('--text', '#1a1a1a');
+      root.style.setProperty('--text-muted', '#666666');
+      document.getElementById('themeBtn').textContent = '🌙';
+    }
+  };
+
+  let isPan = false, sx, sy, tx = 0, ty = 0;
+  const wsImg = document.getElementById('wsImg');
+  wsImg.addEventListener('pointerdown', e => { isPan = true; sx = e.clientX - tx; sy = e.clientY - ty; wsImg.setPointerCapture(e.pointerId); });
+  wsImg.addEventListener('pointermove', e => { if (!isPan) return; tx = e.clientX - sx; ty = e.clientY - sy; wsImg.style.transform = `translate(${tx}px,${ty}px)`; });
+  wsImg.addEventListener('pointerup', () => { isPan = false; });
+
+  update();
+</script>
+</body>
+</html>
