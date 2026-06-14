@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S1 History Revision 6 - Ancient Roman Civilization</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f14;
+    --bg-card: #181822;
+    --bg-hover: #22223a;
+    --border: #2a2a42;
+    --text: #e8e6e3;
+    --text-muted: #9a98a6;
+    --gold: #d4a84b;
+    --gold-dim: rgba(212, 168, 75, 0.15);
+    --gold-glow: rgba(212, 168, 75, 0.25);
+    --blue: #5b9bd5;
+    --blue-dim: rgba(91, 155, 213, 0.12);
+    --red: #c44a4a;
+    --green: #4a9c6d;
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Inter', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    font-size: 15px;
+  }
+
+  header {
+    height: 56px;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    flex-shrink: 0;
+    z-index: 10;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .brand svg { color: var(--gold); }
+  .brand h1 {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .brand h1 span { color: var(--gold); }
+  .brand .badge {
+    font-size: 0.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .btn-icon {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    width: 34px;
+    height: 34px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    font-size: 0.85rem;
+  }
+  .btn-icon:hover { background: var(--bg-hover); color: var(--gold); border-color: var(--gold); }
+
+  .app {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+  }
+
+  .slide-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+  }
+  .slide-viewport {
+    flex: 1;
+    overflow-y: auto;
+    padding: 32px 48px;
+    display: flex;
+    justify-content: center;
+    scroll-behavior: smooth;
+  }
+  .slide-viewport::-webkit-scrollbar { width: 4px; }
+  .slide-viewport::-webkit-scrollbar-track { background: transparent; }
+  .slide-viewport::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .slide {
+    display: none;
+    width: 100%;
+    max-width: 860px;
+    animation: fadeUp 0.35s ease both;
+  }
+  .slide.active { display: block; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .slide-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .slide-title {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .slide-title::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: var(--gold);
+  }
+  .slide-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: rgba(255,255,255,0.08); }
+  .card-gold { border-left: 3px solid var(--gold); }
+  .card-blue { border-left: 3px solid var(--blue); }
+  .card-red { border-left: 3px solid var(--red); }
+  .card-green { border-left: 3px solid var(--green); }
+  .card h3 {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+    color: var(--gold);
+  }
+  .card h4 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--text);
+  }
+  .card p, .card li {
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+  .card ul { list-style: none; padding: 0; }
+  .card ul li::before { content: '▸ '; color: var(--gold); }
+  .card ul li { padding: 2px 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+
+  .tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-bottom: 8px;
+  }
+  .tag-gold { background: var(--gold-dim); color: var(--gold); }
+  .tag-blue { background: var(--blue-dim); color: var(--blue); }
+  .tag-red { background: rgba(196, 74, 74, 0.12); color: var(--red); }
+  .tag-green { background: rgba(74, 156, 109, 0.12); color: var(--green); }
+
+  .exam-tip {
+    background: var(--gold-dim);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-top: 12px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .exam-tip strong { color: var(--gold); }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 16px 0;
+  }
+  .flow-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 16px;
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 500;
+    min-width: 80px;
+  }
+  .flow-item .sub {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    margin-top: 2px;
+  }
+  .flow-arrow {
+    color: var(--gold);
+    font-size: 1.1rem;
+  }
+  .flow-arrow-sm {
+    color: var(--gold);
+    font-size: 0.85rem;
+  }
+
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+    margin: 12px 0;
+  }
+  .compare-table th {
+    background: var(--bg-card);
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--border);
+  }
+  .compare-table th:first-child { color: var(--text-muted); }
+  .compare-table td {
+    padding: 8px 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+  .compare-table td:first-child { font-weight: 600; color: var(--text); }
+  .compare-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  .gloss-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .gloss-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .gloss-item:hover { border-color: var(--gold); background: rgba(212,168,75,0.04); }
+  .gloss-item .term { font-weight: 600; font-size: 0.85rem; }
+  .gloss-item .zh { font-size: 0.7rem; color: var(--gold); margin-top: 1px; }
+  .gloss-item .arr { color: var(--gold); font-size: 0.8rem; }
+  .gloss-def {
+    display: none;
+    margin-top: 12px;
+    background: var(--bg-card);
+    border: 1px dashed var(--border);
+    border-radius: 6px;
+    padding: 16px;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+  .gloss-def.show { display: block; }
+  .gloss-def .en { color: var(--text); font-weight: 600; }
+  .gloss-def .ch { color: var(--gold); }
+  .gloss-def .exam { margin-top: 8px; background: var(--blue-dim); padding: 8px 12px; border-radius: 4px; font-size: 0.78rem; }
+
+  .nav-bar {
+    height: 60px;
+    background: var(--bg-card);
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    flex-shrink: 0;
+  }
+  .nav-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+  }
+  .nav-btn:hover:not(:disabled) { border-color: var(--gold); color: var(--gold); }
+  .nav-btn:disabled { opacity: 0.3; cursor: default; }
+  .nav-info {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .worksheet {
+    width: 0;
+    overflow: hidden;
+    background: var(--bg-card);
+    border-left: 1px solid var(--border);
+    transition: width 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+  }
+  .worksheet.open { width: 360px; }
+  .ws-header {
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--gold);
+  }
+  .ws-header button {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  .ws-body {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #0a0a0e;
+    position: relative;
+  }
+  .ws-body img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    cursor: grab;
+    transition: transform 0.1s;
+  }
+  .ws-body img:active { cursor: grabbing; }
+  .ws-footer {
+    padding: 8px 16px;
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-align: center;
+    border-top: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 900px) {
+    .slide-viewport { padding: 24px 20px; }
+    .slide-title { font-size: 1.6rem; }
+    .grid-2 { grid-template-columns: 1fr; }
+    .gloss-grid { grid-template-columns: 1fr; }
+    .brand .badge { display: none; }
+    .brand h1 { font-size: 0.95rem; }
+    header { padding: 0 12px; }
+  }
+
+  @media (max-width: 640px) {
+    .slide-viewport { padding: 16px 14px; }
+    .slide-title { font-size: 1.3rem; margin-bottom: 14px; padding-bottom: 8px; }
+    .slide-subtitle { font-size: 0.8rem; margin-bottom: 14px; }
+    .card { padding: 14px 16px; margin-bottom: 12px; }
+    .card h3 { font-size: 0.95rem; }
+    .card p, .card li { font-size: 0.78rem; }
+    .flow-item { font-size: 0.7rem; padding: 6px 10px; min-width: 60px; }
+    .flow-item .sub { font-size: 0.55rem; }
+    .compare-table { font-size: 0.72rem; }
+    .compare-table th, .compare-table td { padding: 6px 8px; }
+    .gloss-item { padding: 10px 12px; }
+    .gloss-item .term { font-size: 0.78rem; }
+    .nav-bar { height: 50px; padding: 0 12px; }
+    .nav-btn { font-size: 0.7rem; padding: 6px 10px; }
+    .nav-info { font-size: 0.6rem; }
+    .exam-tip { font-size: 0.72rem; padding: 10px 12px; }
+    header { height: 46px; }
+    .header-right span { display: none; }
+    .btn-icon { width: 30px; height: 30px; font-size: 0.75rem; }
+    .worksheet.open { width: 100%; position: absolute; inset: 0; z-index: 20; }
+  }
+
+  @media (max-height: 500px) and (orientation: landscape) {
+    header { height: 38px; padding: 0 10px; }
+    .brand svg { width: 16px; height: 16px; }
+    .brand h1 { font-size: 0.8rem; }
+    .btn-icon { width: 26px; height: 26px; font-size: 0.65rem; }
+    .slide-viewport { padding: 10px 16px; align-items: flex-start; }
+    .slide-title { font-size: 1.1rem; margin-bottom: 8px; padding-bottom: 6px; border-bottom-width: 1px; }
+    .slide-title::after { width: 30px; height: 1px; }
+    .slide-label { font-size: 0.55rem; margin-bottom: 2px; }
+    .slide-subtitle { font-size: 0.7rem; margin-bottom: 8px; }
+    .card { padding: 8px 12px; margin-bottom: 6px; border-radius: 5px; }
+    .card h3 { font-size: 0.8rem; margin-bottom: 3px; }
+    .card h4 { font-size: 0.72rem; }
+    .card p, .card li { font-size: 0.68rem; line-height: 1.45; }
+    .card ul li { padding: 1px 0; font-size: 0.68rem; }
+    .tag { font-size: 0.5rem; padding: 1px 5px; margin-bottom: 4px; }
+    .exam-tip { font-size: 0.65rem; padding: 6px 10px; margin-top: 6px; }
+    .flow { margin: 8px 0; gap: 4px; }
+    .flow-item { font-size: 0.6rem; padding: 4px 8px; min-width: 50px; border-radius: 4px; }
+    .flow-item .sub { font-size: 0.5rem; }
+    .flow-arrow { font-size: 0.7rem; }
+    .compare-table { font-size: 0.6rem; margin: 6px 0; }
+    .compare-table th { padding: 4px 6px; font-size: 0.6rem; }
+    .compare-table td { padding: 3px 6px; }
+    .gloss-grid { gap: 4px; }
+    .gloss-item { padding: 6px 10px; }
+    .gloss-item .term { font-size: 0.68rem; }
+    .gloss-item .zh { font-size: 0.55rem; }
+    .gloss-def { font-size: 0.68rem; padding: 10px 12px; margin-top: 6px; }
+    .nav-bar { height: 38px; padding: 0 10px; }
+    .nav-btn { font-size: 0.6rem; padding: 4px 8px; }
+    .nav-info { font-size: 0.55rem; }
+    .worksheet.open { width: 60%; position: absolute; right: 0; top: 0; bottom: 0; z-index: 20; }
+    .ws-header { height: 34px; padding: 0 10px; font-size: 0.6rem; }
+    .ws-footer { font-size: 0.5rem; padding: 4px 10px; }
+    .grid-2 { grid-template-columns: 1fr 1fr; gap: 8px; }
+    body { overflow: auto; }
+    .app { overflow: auto; }
+    .slide-area { overflow: visible; }
+    .slide-viewport { overflow: visible; }
+  }
+
+  @media (max-height: 380px) and (orientation: landscape) {
+    .slide-viewport { padding: 6px 12px; }
+    .slide-title { font-size: 0.95rem; margin-bottom: 5px; padding-bottom: 4px; }
+    .slide-subtitle { font-size: 0.6rem; margin-bottom: 5px; }
+    .card { padding: 5px 8px; margin-bottom: 4px; }
+    .card p, .card li { font-size: 0.6rem; line-height: 1.35; }
+    .card h3 { font-size: 0.72rem; }
+    .exam-tip { font-size: 0.55rem; padding: 4px 8px; }
+    .nav-bar { height: 32px; }
+    .nav-btn { font-size: 0.55rem; padding: 3px 6px; }
+    .nav-info { font-size: 0.5rem; }
+    .compare-table { font-size: 0.5rem; }
+    .compare-table th, .compare-table td { padding: 2px 4px; }
+    .flow-item { font-size: 0.5rem; padding: 3px 6px; min-width: 40px; }
+    .flow-item .sub { font-size: 0.45rem; }
+    .gloss-item .term { font-size: 0.6rem; }
+    .gloss-def { font-size: 0.6rem; padding: 6px 8px; }
+    header { height: 32px; }
+    .brand h1 { font-size: 0.7rem; }
+    .btn-icon { width: 22px; height: 22px; font-size: 0.55rem; }
+    .tag { font-size: 0.45rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 10h16"/><path d="M12 2 2 6v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6z"/><path d="M8 10v10"/><path d="M12 10v10"/><path d="M16 10v10"/></svg>
+    <div>
+      <h1>Ancient Rome <span>· Revision 6</span></h1>
+    </div>
+    <span class="badge">S1 History · HK</span>
+  </div>
+  <div class="header-right">
+    <span style="font-size:0.65rem;color:var(--text-muted);">← →</span>
+    <button class="btn-icon" id="themeBtn" title="Toggle theme">☀</button>
+    <button class="btn-icon" id="wsToggle" title="Worksheet">📄</button>
+  </div>
+</header>
+
+<div class="app">
+
+  <div class="slide-area">
+    <div class="slide-viewport" id="viewport">
+
+      <!-- SLIDE 1: TITLE -->
+      <div class="slide active">
+        <div style="text-align:center;padding:40px 0 20px;">
+          <div style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-bottom:16px;">S1 World History · Final Exam Revision</div>
+          <h2 style="font-family:var(--font-display);font-size:2.6rem;font-weight:700;line-height:1.1;margin-bottom:10px;">Ancient Roman<br>Civilization</h2>
+          <p style="font-size:1.1rem;color:var(--blue);margin-bottom:24px;">From Monarchy to Republic to Empire — The Rise & Legacy of Rome</p>
+          <div class="card card-gold" style="text-align:left;">
+            <h3>👨‍🏫 Exam Preparation Tips</h3>
+            <ul>
+              <li><strong>Know the political evolution:</strong> Monarchy → Republic → Empire (with key figures)</li>
+              <li><strong>Learn Roman Republic structure:</strong> Two consuls, Senate, legislative assemblies</li>
+              <li><strong>Julius Caesar → Octavian:</strong> How the Republic became an Empire</li>
+              <li><strong>Key dates:</strong> AD 395 (division), AD 476 (fall of W. Rome), AD 1453 (fall of E. Rome)</li>
+              <li><strong>Greek vs Roman legacy:</strong> Compare sculpture, architecture, and governance</li>
+              <li>Click <strong>📄</strong> to view worksheet pages alongside the slides</li>
+            </ul>
+          </div>
+          <button class="nav-btn" style="margin:20px auto 0;border-color:var(--gold);color:var(--gold);" onclick="go(1)">Begin Revision →</button>
+        </div>
+      </div>
+
+      <!-- SLIDE 2: LOCATION, FOUNDING & GREEK INFLUENCE -->
+      <div class="slide">
+        <div class="slide-label">Origins of Rome</div>
+        <h2 class="slide-title">Location, Founding & Greek Influence</h2>
+        <p class="slide-subtitle">How Rome began — from a legendary founding on the Italian peninsula to absorbing Greek culture.</p>
+
+        <div class="grid-2">
+          <div class="card card-blue">
+            <span class="tag tag-blue">Location</span>
+            <h4>🌍 Where is Rome?</h4>
+            <p>Rome was situated on the <strong>western coast of central Italy</strong>, on the Italian peninsula in the Mediterranean Sea. Its central location helped it control trade and military routes.</p>
+          </div>
+          <div class="card card-red">
+            <span class="tag tag-red">People</span>
+            <h4>👤 Who were the Romans?</h4>
+            <p>The people of Rome were called the <strong>Romans</strong>. They began as a small community that grew into one of the most powerful civilizations in history.</p>
+          </div>
+        </div>
+
+        <div class="card card-gold">
+          <h4>🐺 The Legend of Romulus & Remus</h4>
+          <p>According to legend, Rome was founded by the twin brothers <strong>Romulus</strong> and <strong>Remus</strong>, who were raised by a <strong>she-wolf</strong>. Romulus later killed Remus and became the first king of Rome. However, this story is considered a <strong>legend, not historical fact</strong>.</p>
+          <div class="exam-tip"><strong>📝 Exam Note:</strong> The Romulus & Remus story is a <strong>legend</strong>, not actual history. You may be asked to identify it as such.</div>
+        </div>
+
+        <div class="card card-blue">
+          <span class="tag tag-blue">Greek Influence</span>
+          <h4>🏛️ Rome Learned from Greece</h4>
+          <p>Roman civilization was <strong>heavily influenced by Greek civilization</strong>. The Romans learned from the Greeks in areas such as art, architecture, philosophy, government, and religion, then developed their <strong>own distinct Roman civilization</strong>.</p>
+        </div>
+      </div>
+
+      <!-- SLIDE 3: POLITICAL EVOLUTION -->
+      <div class="slide">
+        <div class="slide-label">Political Systems</div>
+        <h2 class="slide-title">Political Evolution of Rome</h2>
+        <p class="slide-subtitle">Rome's government changed dramatically over time — from kings to citizens to emperors.</p>
+
+        <div class="flow">
+          <div class="flow-item">👑 Monarchy<div class="sub">Ruled by kings</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-item" style="border-color:var(--blue);color:var(--blue);">🏛️ Republic<div class="sub">Ruled by the people</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-item" style="border-color:var(--gold);color:var(--gold);">👑 Empire<div class="sub">Ruled by emperors</div></div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card card-red">
+            <span class="tag tag-red">Stage 1</span>
+            <h4>👑 Roman Monarchy</h4>
+            <p>Rome was originally ruled by <strong>kings</strong> under a <strong>monarchy</strong>. The king held supreme power, advised by a council of elders.</p>
+          </div>
+          <div class="card card-green">
+            <span class="tag tag-green">Stage 2</span>
+            <h4>🏛️ Roman Republic</h4>
+            <p>Romans <strong>overthrew a cruel king</strong> and established a <strong>republic</strong> — a state ruled by the people. Male citizens elected their rulers. This system was similar to Athenian democracy.</p>
+          </div>
+        </div>
+
+        <div class="card card-gold">
+          <span class="tag tag-gold">Stage 3</span>
+          <h4>👑 Roman Empire</h4>
+          <p>After a period of civil wars, <strong>Octavian Caesar</strong> restored monarchy and became the <strong>first emperor</strong>. In the empire, emperors held <strong>all power</strong>; citizens no longer elected leaders. The executive and legislative branches lost their authority.</p>
+        </div>
+
+        <div class="exam-tip"><strong>📝 Key Exam Point:</strong> Rome's political system changed from <strong>Monarchy → Republic → Monarchy (Empire)</strong>. Know the reasons for each change.</div>
+      </div>
+
+      <!-- SLIDE 4: ROMAN REPUBLIC STRUCTURE -->
+      <div class="slide">
+        <div class="slide-label">Government</div>
+        <h2 class="slide-title">Structure of the Roman Republic</h2>
+        <p class="slide-subtitle">The Republic divided power so that it would not be held by a single person.</p>
+
+        <div class="grid-2">
+          <div class="card card-blue">
+            <span class="tag tag-blue">Executive Branch</span>
+            <h4>👤 Consuls & Senate</h4>
+            <ul>
+              <li><strong>Two consuls</strong> were the highest officials, elected annually by male citizens</li>
+              <li>The <strong>Senate</strong> advised the consuls and controlled finances and foreign policy</li>
+              <li>Consuls commanded the army and presided over the government</li>
+            </ul>
+          </div>
+          <div class="card card-green">
+            <span class="tag tag-green">Legislative Branch</span>
+            <h4>📜 Legislative Assemblies</h4>
+            <ul>
+              <li><strong>Legislative assemblies</strong> discussed and passed laws</li>
+              <li>All male citizens could participate in these assemblies</li>
+              <li>They voted on laws, elected officials, and declared war or peace</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card card-gold">
+          <h4>⚖️ Separation of Powers</h4>
+          <p>Power was <strong>separated</strong> among the consuls, the Senate, and the legislative assemblies. This prevented any single person from holding all the power — a principle that influences modern governments today.</p>
+        </div>
+
+        <div class="exam-tip"><strong>📝 Exam Note:</strong> A <strong>republic</strong> = a state ruled by the people through elected representatives. Rome's republic had <strong>two branches</strong>: executive (consuls + Senate) and legislative (assemblies).</div>
+      </div>
+
+      <!-- SLIDE 5: POWER STRUGGLES & RISE OF EMPIRE -->
+      <div class="slide">
+        <div class="slide-label">Transition</div>
+        <h2 class="slide-title">Power Struggles & the Rise of the Roman Empire</h2>
+        <p class="slide-subtitle">The Republic collapsed after a series of power struggles between ambitious generals.</p>
+
+        <div class="card card-red">
+          <span class="tag tag-red">Key Figure</span>
+          <h4>⚔️ Julius Caesar</h4>
+          <p>A successful Roman general who <strong>defeated the senators</strong> and became <strong>dictator for life</strong> — holding all power in his own hands. He made the Roman Republic more powerful and improved people's lives, gaining support from <strong>soldiers and common people</strong>. However, he was later <strong>assassinated by senators</strong> who feared his power.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card card-blue">
+            <h4>🤝 Octavian & Antony</h4>
+            <p>After Caesar's death, his adopted son <strong>Octavian</strong> and general <strong>Antony</strong> cooperated to defeat the senators and ruled the republic together.</p>
+          </div>
+          <div class="card card-gold">
+            <h4>⚔️ Civil War</h4>
+            <p>They eventually fought a <strong>civil war</strong>. Octavian defeated Antony and became the sole ruler of Rome.</p>
+          </div>
+        </div>
+
+        <div class="card card-gold" style="border-left-color:var(--gold);">
+          <span class="tag tag-gold">The Empire Begins</span>
+          <h4>👑 Octavian — First Emperor</h4>
+          <p>After his victory, <strong>Octavian Caesar restored monarchy</strong> and founded the <strong>Roman Empire</strong>. He became the <strong>first emperor</strong>. In the empire, emperors held <strong>all power</strong>; citizens no longer elected leaders.</p>
+          <div class="exam-tip"><strong>📝 Key Exam Point:</strong> The Republic ended when <strong>one person</strong> (first Julius Caesar as dictator, then Octavian as emperor) held all the power.</div>
+        </div>
+      </div>
+
+      <!-- SLIDE 6: GOLDEN AGE & DECLINE -->
+      <div class="slide">
+        <div class="slide-label">Empire</div>
+        <h2 class="slide-title">Golden Age, Division & Decline</h2>
+        <p class="slide-subtitle">At its peak, Rome was the most powerful empire in the ancient world. But internal and external pressures led to its fall.</p>
+
+        <div class="card card-blue">
+          <span class="tag tag-blue">Golden Age</span>
+          <h4>🌟 The Roman Empire at Its Peak</h4>
+          <p>The Roman Empire represented the <strong>golden age of ancient Rome</strong> — powerful, wealthy, and expansive. Its vast territory covered <strong>Europe, Asia, and Africa</strong>. The <strong>Mediterranean Sea</strong> became the Empire's "inner lake," surrounded entirely by Roman lands.</p>
+        </div>
+
+        <div class="card card-red">
+          <span class="tag tag-red">Division</span>
+          <h4>📅 AD 395 — The Empire is Divided</h4>
+          <p>In <strong>AD 395</strong>, the Roman Empire was divided into two halves:</p>
+          <ul>
+            <li><strong>Western Roman Empire</strong> — capital in Rome</li>
+            <li><strong>Eastern Roman Empire</strong> (Byzantine Empire) — capital in Constantinople</li>
+          </ul>
+        </div>
+
+        <div class="grid-2">
+          <div class="card card-gold">
+            <span class="tag tag-gold">Fall of the West</span>
+            <h4>AD 476</h4>
+            <p>The <strong>Western Roman Empire</strong> fell to the <strong>Germanic peoples</strong> from the north. This marked the <strong>end of Ancient times</strong> and the <strong>start of the Medieval period</strong> in Europe.</p>
+          </div>
+          <div class="card card-gold">
+            <span class="tag tag-gold">Fall of the East</span>
+            <h4>AD 1453</h4>
+            <p>The <strong>Eastern Roman Empire (Byzantine)</strong> fell to the <strong>Ottoman Turks</strong> when Constantinople was conquered. This marked the <strong>end of Medieval times</strong> and the <strong>start of Modern times</strong>.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 7: GREEK CULTURAL LEGACY -->
+      <div class="slide">
+        <div class="slide-label">Cultural Heritage</div>
+        <h2 class="slide-title">Greek Myths, Olympics, Language & Philosophy</h2>
+        <p class="slide-subtitle">Classical Greek culture laid the foundation for Western civilization in literature, sports, language, and thought.</p>
+
+        <div class="grid-2">
+          <div class="card card-gold">
+            <span class="tag tag-gold">Myths & Religion</span>
+            <h4>🎭 Greek Mythology</h4>
+            <p>Ancient Greeks worshipped many <strong>gods and goddesses</strong>. <strong>Zeus</strong> was the head of the gods. Gods were imagined as <strong>half-god, half-man</strong> — with human feelings but also great strength and wisdom. These myths provided themes for European literature and drama.</p>
+          </div>
+          <div class="card card-blue">
+            <span class="tag tag-blue">Sport</span>
+            <h4>🏟️ Olympic Games</h4>
+            <p>Greeks believed some gods lived on <strong>Mount Olympus</strong>. The <strong>Olympic Games</strong> were held to honour <strong>Zeus</strong>. During the games, city-states <strong>stopped fighting</strong> so athletes could compete safely. The <strong>Modern Olympic Games</strong> continue this tradition every <strong>four years</strong>.</p>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card card-blue">
+            <span class="tag tag-blue">Language</span>
+            <h4>🗣️ Influence on Languages</h4>
+            <p>Greek myths shaped <strong>European languages</strong>. Many modern English words come from Greek origins. Example: <strong>"Music"</strong> comes from the Greek word <strong>Muses</strong>, goddesses of the arts.</p>
+          </div>
+          <div class="card card-gold">
+            <span class="tag tag-gold">Philosophy</span>
+            <h4>📚 Western Philosophy</h4>
+            <p>The word <strong>"philosophy"</strong> means "love of wisdom" in Greek. <strong>Socrates, Plato, and Aristotle</strong> are regarded as the <strong>founders of Western philosophy</strong>. Their ideas became the foundation of European intellectual traditions.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 8: ART & ARCHITECTURE -->
+      <div class="slide">
+        <div class="slide-label">Art & Architecture</div>
+        <h2 class="slide-title">Greek vs Roman Art & Architecture</h2>
+        <p class="slide-subtitle">Both civilizations made lasting contributions to art and building design. Compare their styles.</p>
+
+        <div class="card card-blue">
+          <span class="tag tag-blue">Architecture</span>
+          <h4>🏛️ Greek Architecture</h4>
+          <p>Important Greek buildings (especially <strong>temples</strong>) were surrounded by tall stone <strong>columns</strong>. <strong>Pediments</strong> (triangular structures at the top) were common. These elements became <strong>long-lasting models</strong> adopted by architects for centuries.</p>
+        </div>
+        <div class="card card-red">
+          <span class="tag tag-red">Architecture</span>
+          <h4>🏟️ Roman Architecture</h4>
+          <p>Roman architecture was characterized by <strong>domes</strong> and <strong>arches</strong>. Roman cities were <strong>well-planned</strong> with extensive <strong>road networks</strong> linking Rome to its provinces. They built diverse facilities: temples, forums, theatres, stadiums, and bathhouses.</p>
+        </div>
+
+        <table class="compare-table">
+          <tr><th>Aspect</th><th>🏛️ Ancient Greece</th><th>🏟️ Ancient Rome</th></tr>
+          <tr><td>Sculpture Material</td><td>Bronze and marble</td><td>Marble and bronze (copied Greek styles)</td></tr>
+          <tr><td>Sculpture Themes</td><td>Worship, myths, athletes</td><td>Realistic images of emperors and nobles</td></tr>
+          <tr><td>Sculpture Style</td><td><strong>Ideal proportions</strong>, lifelike personality, body movement</td><td><strong>Realistic</strong>, close attention to details</td></tr>
+          <tr><td>Architecture Features</td><td>Columns, pediments (triangular roofs)</td><td>Domes, arches, planned cities, roads</td></tr>
+        </table>
+
+        <div class="exam-tip"><strong>📝 Compare & Contrast:</strong> Greek sculpture focused on <strong>ideal beauty and perfection</strong>; Roman sculpture focused on <strong>realistic detail and individual character</strong>. Greek architecture used <strong>columns and pediments</strong>; Roman architecture used <strong>domes and arches</strong>.</div>
+      </div>
+
+      <!-- SLIDE 9: GOVERNANCE & LEGAL LEGACY -->
+      <div class="slide">
+        <div class="slide-label">Legacy</div>
+        <h2 class="slide-title">Governance & Legal Systems</h2>
+        <p class="slide-subtitle">The political and legal ideas of Greece and Rome continue to shape modern democracies and legal systems.</p>
+
+        <div class="grid-2">
+          <div class="card card-blue">
+            <span class="tag tag-blue">Greek Legacy</span>
+            <h4>🏛️ Athenian Democracy</h4>
+            <p>Athenian democracy was the most open political system of its time. Key features: <strong>public participation</strong> and <strong>secret ballot</strong>. Many modern countries draw inspiration from this model.</p>
+          </div>
+          <div class="card card-red">
+            <span class="tag tag-red">Roman Legacy</span>
+            <h4>🏟️ Republican System</h4>
+            <p>A <strong>republic</strong> = a state ruled by the people. The Roman republican system spread from Rome to Europe and still influences modern countries today.</p>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card card-gold">
+            <span class="tag tag-gold">Centralization</span>
+            <h4>🏛️ Administrative Centralization</h4>
+            <p>The Roman imperial system emphasized <strong>centralized administration</strong>. In modern states, the <strong>central government</strong> holds supreme power while <strong>local governments</strong> derive authority from it.</p>
+          </div>
+          <div class="card card-blue">
+            <span class="tag tag-blue">Rule of Law</span>
+            <h4>⚖️ Law & Justice</h4>
+            <p>Athenians valued <strong>civil rights</strong> and <strong>law</strong>. Romans later adopted the idea of <strong>rule of law</strong> from Greece. Romans believed <strong>all citizens were equal before the law</strong> with rights to a <strong>fair trial</strong> and to <strong>appeal</strong>. Many modern countries adopted the <strong>jury system</strong> from these traditions.</p>
+          </div>
+        </div>
+
+        <div class="exam-tip"><strong>📝 Exam Strategy:</strong> Questions often ask how Greek and Roman political ideas influenced modern governments. Focus on: <strong>democracy</strong> (Greece), <strong>republic</strong> (Rome), <strong>separation of powers</strong> (Rome), <strong>rule of law</strong>, and the <strong>jury system</strong>.</div>
+      </div>
+
+    </div>
+
+    <div class="nav-bar">
+      <button class="nav-btn" id="prevBtn" onclick="prev()">← Previous</button>
+      <span class="nav-info" id="slideInfo">Slide 1 of 9</span>
+      <button class="nav-btn" id="nextBtn" onclick="next()">Next →</button>
+    </div>
+  </div>
+
+  <div class="worksheet" id="wsPanel">
+    <div class="ws-header">
+      <span>📄 Worksheet Reference</span>
+      <button onclick="toggleWs()">✕</button>
+    </div>
+    <div class="ws-body">
+      <img id="wsImg" src="revision%206/page%201.jpeg" alt="Worksheet">
+    </div>
+    <div class="ws-footer" id="wsLabel">Page 1</div>
+  </div>
+
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let cur = 0;
+
+  function go(i) { cur = i; update(); }
+  function next() { if (cur < slides.length - 1) { cur++; update(); } }
+  function prev() { if (cur > 0) { cur--; update(); } }
+  function update() {
+    slides.forEach((s, i) => s.classList.toggle('active', i === cur));
+    document.getElementById('prevBtn').disabled = cur === 0;
+    document.getElementById('nextBtn').disabled = cur === slides.length - 1;
+    document.getElementById('slideInfo').textContent = `Slide ${cur + 1} of ${slides.length}`;
+    document.getElementById('viewport').scrollTop = 0;
+    updateWs();
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+  });
+
+  const wsMap = [
+    'page%201.jpeg', 'page%201.jpeg', 'page%202.jpeg', 'page%203.jpeg',
+    'page%204.jpeg', 'page%205.jpeg', 'page%206.jpeg', 'page%207.jpeg',
+    'page%208.jpeg'
+  ];
+  const wsLabels = [
+    'Cover', 'Location & Founding', 'Political Evolution',
+    'Republic Structure', 'Power Struggles', 'Golden Age & Decline',
+    'Cultural Legacy', 'Art & Architecture', 'Governance & Law'
+  ];
+
+  function updateWs() {
+    document.getElementById('wsImg').src = `revision%206/${wsMap[cur] || 'page%201.jpeg'}`;
+    document.getElementById('wsLabel').textContent = wsLabels[cur] || 'Reference';
+  }
+
+  function toggleWs() {
+    document.getElementById('wsPanel').classList.toggle('open');
+  }
+  document.getElementById('wsToggle').onclick = toggleWs;
+
+  let dark = true;
+  document.getElementById('themeBtn').onclick = () => {
+    dark = !dark;
+    const root = document.documentElement;
+    if (dark) {
+      root.style.setProperty('--bg', '#0f0f14');
+      root.style.setProperty('--bg-card', '#181822');
+      root.style.setProperty('--bg-hover', '#22223a');
+      root.style.setProperty('--border', '#2a2a42');
+      root.style.setProperty('--text', '#e8e6e3');
+      root.style.setProperty('--text-muted', '#9a98a6');
+      document.getElementById('themeBtn').textContent = '☀';
+    } else {
+      root.style.setProperty('--bg', '#f5f3ef');
+      root.style.setProperty('--bg-card', '#ffffff');
+      root.style.setProperty('--bg-hover', '#f0ede8');
+      root.style.setProperty('--border', '#d6d2ca');
+      root.style.setProperty('--text', '#1a1a1a');
+      root.style.setProperty('--text-muted', '#666666');
+      document.getElementById('themeBtn').textContent = '🌙';
+    }
+  };
+
+  let isPan = false, sx, sy, tx = 0, ty = 0;
+  const wsImg = document.getElementById('wsImg');
+  wsImg.addEventListener('pointerdown', e => { isPan = true; sx = e.clientX - tx; sy = e.clientY - ty; wsImg.setPointerCapture(e.pointerId); });
+  wsImg.addEventListener('pointermove', e => { if (!isPan) return; tx = e.clientX - sx; ty = e.clientY - sy; wsImg.style.transform = `translate(${tx}px,${ty}px)`; });
+  wsImg.addEventListener('pointerup', () => { isPan = false; });
+
+  update();
+</script>
+</body>
+</html>
