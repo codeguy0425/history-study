@@ -685,7 +685,7 @@
       <button onclick="toggleWs()">✕</button>
     </div>
     <div class="ws-body">
-      <img id="wsImg" src="revision%207/page1.jpeg" alt="Worksheet">
+      <img id="wsImg" src="" alt="Worksheet">
     </div>
     <div class="ws-footer" id="wsLabel">Page 1</div>
   </div>
@@ -723,8 +723,9 @@
     'HK & China Cultural Relations'
   ];
 
+  const wsFolder = 'revision 7';
   function updateWs() {
-    document.getElementById('wsImg').src = `revision%207/${wsMap[cur] || 'page1.jpeg'}`;
+    document.getElementById('wsImg').src = wsFolder + '/' + (wsMap[cur] || 'page1.jpeg');
     document.getElementById('wsLabel').textContent = wsLabels[cur] || 'Reference';
   }
 

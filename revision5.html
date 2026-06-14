@@ -938,7 +938,7 @@
       <button onclick="toggleWs()">✕</button>
     </div>
     <div class="ws-body">
-      <img id="wsImg" src="revision%205/page1.jpeg" alt="Worksheet">
+      <img id="wsImg" src="" alt="Worksheet">
     </div>
     <div class="ws-footer" id="wsLabel">Page 1</div>
   </div>
@@ -1067,8 +1067,9 @@
     'Alexander & Empire', 'Vocabulary Reference'
   ];
 
+  const wsFolder = 'revision 5';
   function updateWs() {
-    document.getElementById('wsImg').src = `revision%205/${wsMap[cur] || 'page1.jpeg'}`;
+    document.getElementById('wsImg').src = wsFolder + '/' + (wsMap[cur] || 'page1.jpeg');
     document.getElementById('wsLabel').textContent = wsLabels[cur] || 'Reference';
   }
 

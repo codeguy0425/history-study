@@ -837,7 +837,7 @@
       <button onclick="toggleWs()">✕</button>
     </div>
     <div class="ws-body">
-      <img id="wsImg" src="revision%206/page%201.jpeg" alt="Worksheet">
+      <img id="wsImg" src="" alt="Worksheet">
     </div>
     <div class="ws-footer" id="wsLabel">Page 1</div>
   </div>
@@ -865,10 +865,11 @@
     if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
   });
 
+  const wsFolder = 'revision 6';
   const wsMap = [
-    'page%201.jpeg', 'page%201.jpeg', 'page%202.jpeg', 'page%203.jpeg',
-    'page%204.jpeg', 'page%205.jpeg', 'page%206.jpeg', 'page%207.jpeg',
-    'page%208.jpeg'
+    'page 1.jpeg', 'page 1.jpeg', 'page 2.jpeg', 'page 3.jpeg',
+    'page 4.jpeg', 'page 5.jpeg', 'page 6.jpeg', 'page 7.jpeg',
+    'page 8.jpeg'
   ];
   const wsLabels = [
     'Cover', 'Location & Founding', 'Political Evolution',
@@ -877,7 +878,7 @@
   ];
 
   function updateWs() {
-    document.getElementById('wsImg').src = `revision%206/${wsMap[cur] || 'page%201.jpeg'}`;
+    document.getElementById('wsImg').src = wsFolder + '/' + (wsMap[cur] || 'page 1.jpeg');
     document.getElementById('wsLabel').textContent = wsLabels[cur] || 'Reference';
   }
 
