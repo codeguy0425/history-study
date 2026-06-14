@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>S1 World History - Final Exam Revision Portal</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================
+       PREMIUM COHESIVE DESIGN SYSTEM
+       ========================================== */
+    :root {
+      --bg-primary: #0a0d1a;
+      --bg-secondary: #121626;
+      --bg-tertiary: #1b2038;
+      
+      --accent-blue: #38bdf8;
+      --accent-blue-hover: #0ea5e9;
+      --accent-gold: #fbbf24;
+      --accent-gold-hover: #f59e0b;
+      --accent-purple: #a855f7;
+      
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      
+      --border-color: #242c4c;
+      --border-active: #38bdf8;
+      
+      --font-display: 'Cinzel', serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      
+      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-bounce: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      
+      --glow-blue: 0 0 20px rgba(56, 189, 248, 0.25);
+      --glow-gold: 0 0 20px rgba(251, 191, 36, 0.2);
+    }
+
+    body.light-theme {
+      --bg-primary: #f1f5f9;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #e2e8f0;
+      
+      --accent-blue: #0284c7;
+      --accent-blue-hover: #0369a1;
+      --accent-gold: #d97706;
+      --accent-gold-hover: #b45309;
+      --accent-purple: #7e22ce;
+      
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      
+      --border-color: #cbd5e1;
+      --border-active: #0284c7;
+      
+      --glow-blue: 0 4px 15px rgba(2, 132, 199, 0.15);
+      --glow-gold: 0 4px 15px rgba(217, 119, 6, 0.1);
+    }
+
+    /* Core Page Settings */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.4s ease, color 0.4s ease;
+      background-image: radial-gradient(circle at 10% 20%, rgba(20, 27, 45, 0.4) 0%, rgba(10, 13, 26, 0.1) 90%);
+    }
+
+    header {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand-logo {
+      color: var(--accent-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(251, 191, 36, 0.1);
+      border: 1px solid rgba(251, 191, 36, 0.2);
+      padding: 10px;
+      border-radius: 12px;
+    }
+
+    .brand-title h1 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, var(--text-primary) 30%, var(--accent-gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-title p {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .btn-theme {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-theme:hover {
+      background: var(--border-color);
+      border-color: var(--accent-blue);
+      color: var(--accent-blue);
+      transform: translateY(-2px);
+    }
+
+    /* Portal Main Container */
+    main {
+      flex: 1;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 40px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    /* Welcome Banner */
+    .welcome-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    /* Classical Border Trim inside Welcome Banner */
+    .welcome-card::after {
+      content: '';
+      position: absolute;
+      top: 10px;
+      bottom: 10px;
+      left: 10px;
+      right: 10px;
+      border: 1px dashed rgba(251, 191, 36, 0.15);
+      border-radius: 10px;
+      pointer-events: none;
+    }
+
+    .welcome-text {
+      max-width: 70%;
+      z-index: 2;
+    }
+
+    .welcome-text h2 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+      margin-bottom: 12px;
+    }
+
+    .welcome-text p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .hk-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--accent-blue);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .welcome-stats {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      min-width: 180px;
+      z-index: 2;
+    }
+
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--accent-gold);
+    }
+
+    .stat-lbl {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
+    /* Revision Cards Grid */
+    .modules-section-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: -10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-left: 4px solid var(--accent-gold);
+      padding-left: 12px;
+    }
+
+    .grid-modules {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .module-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 480px;
+      transition: var(--transition-bounce);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      position: relative;
+    }
+
+    .module-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--glow-blue);
+      border-color: var(--accent-blue);
+    }
+
+    .module-header {
+      height: 120px;
+      padding: 24px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      color: #ffffff;
+      overflow: hidden;
+    }
+
+    /* Customized Greek, Medieval, Renaissance pattern backgrounds */
+    .bg-roman {
+      background: linear-gradient(135deg, #1e2942 0%, #0f172a 100%);
+      border-bottom: 2px solid var(--accent-gold);
+    }
+    .bg-medieval {
+      background: linear-gradient(135deg, #2e1049 0%, #120324 100%);
+      border-bottom: 2px solid var(--accent-purple);
+    }
+    .bg-renaissance {
+      background: linear-gradient(135deg, #3b1e10 0%, #1c0c05 100%);
+      border-bottom: 2px solid #ea580c;
+    }
+
+    .module-label {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      opacity: 0.8;
+    }
+
+    .module-header h3 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .module-body {
+      padding: 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .module-desc {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    .topic-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .topic-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .topic-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-blue);
+    }
+
+    .bg-medieval .topic-dot { background: var(--accent-purple); }
+    .bg-renaissance .topic-dot { background: #ea580c; }
+
+    .btn-enter {
+      width: 100%;
+      background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-blue-hover) 100%);
+      color: var(--bg-primary);
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: var(--transition-smooth);
+      text-decoration: none;
+    }
+
+    .btn-enter:hover {
+      box-shadow: 0 4px 12px var(--accent-blue-glow);
+      transform: translateY(-1px);
+    }
+
+    /* Locked state styling for future revisions */
+    .module-locked {
+      filter: grayscale(0.5);
+      border-color: rgba(255, 255, 255, 0.05);
+    }
+    .module-locked:hover {
+      transform: none;
+      box-shadow: none;
+      border-color: var(--border-color);
+    }
+
+    .locked-badge {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--text-secondary);
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      align-self: flex-start;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .btn-locked {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      cursor: not-allowed;
+    }
+    .btn-locked:hover {
+      background: var(--bg-tertiary);
+      color: var(--text-muted);
+      box-shadow: none;
+      transform: none;
+    }
+
+
+    /* S1 History Exam Strategy Guidelines (Bilingual) */
+    .guidelines-section {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 28px;
+    }
+
+    .guidelines-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      color: var(--accent-gold);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .tip-box {
+      background: var(--bg-tertiary);
+      border-left: 3px solid var(--accent-blue);
+      padding: 16px;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .tip-box h4 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .tip-box p {
+      font-size: 0.8rem;
+      line-height: 1.5;
+      color: var(--text-secondary);
+    }
+
+    /* Footer styling */
+    footer {
+      text-align: center;
+      padding: 24px;
+      border-top: 1px solid var(--border-color);
+      background: var(--bg-secondary);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 900px) {
+      .grid-modules {
+        grid-template-columns: 1fr;
+      }
+      .module-card {
+        height: auto;
+      }
+      .welcome-card {
+        flex-direction: column;
+        text-align: center;
+      }
+      .welcome-text {
+        max-width: 100%;
+      }
+      .tips-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       PORTAL HEADER
+       ========================================== -->
+  <header>
+    <div class="brand">
+      <div class="brand-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
+      </div>
+      <div class="brand-title">
+        <h1>S1 World History revision hub</h1>
+        <p>Semester 2 Final Exam Masterclass</p>
+      </div>
+    </div>
+    
+    <button class="btn-theme" id="theme-toggle" title="Toggle Theme">
+      <!-- Sun SVG Icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+    </button>
+  </header>
+
+  <!-- ==========================================
+       PORTAL MAIN VIEWPORT
+       ========================================== -->
+  <main>
+    
+    <!-- Welcome Teacher Card -->
+    <div class="welcome-card">
+      <div class="welcome-text">
+        <div class="hk-badge">
+          <span>🇭🇰</span> EMI Secondary History Curriculum
+        </div>
+        <h2 style="margin-top: 10px;">Welcome S1 Historians!</h2>
+        <p>
+          This is your central examination preparation platform. Our history final exam will assess the development of European civilizations from classical Greco-Roman roots, through medieval feudal societies, up to the dawn of the Renaissance and modern times.
+        </p>
+        <p style="font-size: 0.85rem; margin-bottom: 0;">
+          📚 Use these structured interactive study decks to review key milestones, complete active recall exercises, and cross-examine school worksheets directly from your web browser.
+        </p>
+      </div>
+      
+      <div class="welcome-stats">
+        <div class="stat-num">3</div>
+        <div class="stat-lbl">Revision Units</div>
+        <div style="width: 100%; height: 2px; background: var(--border-color); margin: 12px 0;"></div>
+        <div class="stat-num" style="font-size: 1.5rem; color: var(--accent-blue);">1 / 3</div>
+        <div class="stat-lbl" style="font-size: 0.6rem;">Active Modules</div>
+      </div>
+    </div>
+
+    <!-- Active Modules Section -->
+    <div class="modules-section-title">
+      Exam Study Units / 考試複習單元
+    </div>
+
+    <div class="grid-modules">
+      
+      <!-- MODULE 5: ACTIVE -->
+      <article class="module-card">
+        <div class="module-header bg-roman">
+          <div class="module-label">Revision Unit 5</div>
+          <h3>Greco-Roman Civilization</h3>
+        </div>
+        <div class="module-body">
+          <p class="module-desc">
+            Explore the birth of classical civilization. Analyze the roots of Europe, Greek city-states, the great Sparta vs. Athens rivalry, political systems, and the spread of Hellenistic culture.
+          </p>
+          <div class="topic-list">
+            <div class="topic-item"><div class="topic-dot"></div><span>Division of European History</span></div>
+            <div class="topic-item"><div class="topic-dot"></div><span>Minoan & Mycenaean Civilizations</span></div>
+            <div class="topic-item"><div class="topic-dot"></div><span>Geography & Greek City-States</span></div>
+            <div class="topic-item"><div class="topic-dot"></div><span>Athens vs. Sparta Interactive Arena</span></div>
+            <div class="topic-item"><div class="topic-dot"></div><span>Quiz & Active Recall Flashcards</span></div>
+          </div>
+          <a href="revision5.html" class="btn-enter">
+            <span>Enter Study Deck</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- MODULE 6: LOCKED -->
+      <article class="module-card module-locked">
+        <div class="module-header bg-medieval">
+          <div class="module-label">Revision Unit 6</div>
+          <h3>Medieval Europe & Feudalism</h3>
+        </div>
+        <div class="module-body">
+          <div class="locked-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Coming Soon
+          </div>
+          <p class="module-desc">
+            Investigate life in the Middle Ages following the Fall of Rome (AD 476). Learn about the Feudal System hierarchy, manor life, the power of Christendom, and the significance of the Crusades.
+          </p>
+          <div class="topic-list">
+            <div class="topic-item"><div class="topic-dot"></div><span>Fall of Western Roman Empire (AD 476)</span></div>
+            <div class="topic-item"><div class="topic-dot"></div><span>The Feudal Lord, Vassal, & Serf Hierarchy</span></div>
+            <div class="topic-item"><div class="topic-dot"></div><span>The Roman Catholic Church & Manor Economy</span></div>
+            <div class="topic-item"><div class="topic-dot"></div><span>Impact of the Crusades (Military & Cultural)</span></div>
+          </div>
+          <button class="btn-enter btn-locked" disabled>
+            <span>Under Teacher Preparation</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- MODULE 7: LOCKED -->
+      <article class="module-card module-locked">
+        <div class="module-header bg-renaissance">
+          <div class="module-label">Revision Unit 7</div>
+          <h3>The Renaissance & Modern Times</h3>
+        </div>
+        <div class="module-body">
+          <div class="locked-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Coming Soon
+          </div>
+          <p class="module-desc">
+            Discover the transition into Modern Times starting in AD 1453. Cover the spectacular rebirth of Greek and Roman classical ideas during the Renaissance, the Age of Discovery, and global expansion.
+          </p>
+          <div class="topic-list">
+            <div class="topic-item"><div class="topic-dot"></div><span>Fall of Eastern Roman Empire (AD 1453)</span></div>
+            <div class="topic-item"><div class="topic-dot"></div><span>Renaissance Humanism, Art, and Science</span></div>
+            <div class="topic-item"><div class="topic-dot"></div><span>Age of Geographical Discoveries</span></div>
+            <div class="topic-item"><div class="topic-dot"></div><span>The Scientific Revolution Achievements</span></div>
+          </div>
+          <button class="btn-enter btn-locked" disabled>
+            <span>Under Teacher Preparation</span>
+          </button>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Exam Strategy Section -->
+    <div class="guidelines-section">
+      <div class="guidelines-title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        S1 History Exam Survival Guidelines / 考試奪分策略
+      </div>
+      <div class="tips-grid">
+        <div class="tip-box">
+          <h4>💡 Active Recall (主動回憶法)</h4>
+          <p>Don't just read notes repeatedly. Use the flashcards in Revision Unit 5 and test your recall. Attempt the interactive quiz multiple times until you secure a 5/5 score. Let mistakes be your best teacher!</p>
+        </div>
+        <div class="tip-box" style="border-left-color: var(--accent-gold);">
+          <h4>💡 Direct Cause & Effect (釐清因果關係)</h4>
+          <p>History essay questions heavily penalize students who memorize facts but fail to link them. For example: always connect mountainous Greek geography directly to the isolation of communities and the birth of independent city-states.</p>
+        </div>
+        <div class="tip-box" style="border-left-color: var(--accent-purple);">
+          <h4>💡 DBQ Data Analysis (史料分析能力)</h4>
+          <p>In Data-Based Questions (DBQ), analyze worksheets and source images closely. Click the <strong>Worksheet Companion</strong> tool in the revision slide to cross-reference historical data and sources directly while reading our notes.</p>
+        </div>
+        <div class="tip-box" style="border-left-color: #ea580c;">
+          <h4>💡 Spelling & Vocabulary (核心詞彙拼寫)</h4>
+          <p>Spelling counts! Ensure you can spell key vocabulary correctly (e.g. *Minoan*, *Mycenaean*, *Oligarchy*, *Democracy*, *Byzantine*). Capitalize proper nouns like *Athens*, *Sparta*, and *Alexander*.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ==========================================
+       PORTAL FOOTER
+       ========================================== -->
+  <footer>
+    <p>&copy; 2026 S1 World History Exam Revision Masterclass Hub &bull; Designed for Professional Secondary School Education in Hong Kong</p>
+  </footer>
+
+  <script>
+    // Theme Toggling
+    const themeBtn = document.getElementById('theme-toggle');
+    themeBtn.addEventListener('click', () => {
+      document.body.classList.toggle('light-theme');
+    });
+  </script>
+</body>
+</html>
