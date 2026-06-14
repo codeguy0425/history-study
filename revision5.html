@@ -1462,6 +1462,192 @@
         text-align: left;
       }
     }
+
+    /* Landscape Mode & Low Height Viewport Optimizations */
+    @media (max-height: 520px) {
+      body {
+        height: 100vh;
+        height: 100svh; /* Solves mobile browser dynamic-bar overflow */
+      }
+      
+      header {
+        height: 40px;
+        padding: 0 12px;
+      }
+      .brand-icon {
+        display: none;
+      }
+      .brand h1 {
+        font-size: 0.85rem;
+      }
+      .brand p {
+        display: none !important; /* Hide teacher subtitle to save vital vertical space */
+      }
+      .btn-companion {
+        height: 28px;
+        font-size: 0.7rem;
+        padding: 0 8px;
+      }
+      
+      /* Reset slide alignments to fix the flexbox center top-clip scroll bug */
+      .slide-container {
+        padding: 8px 12px;
+        align-items: flex-start;
+      }
+      
+      /* Hide bulky borders to maximize content height */
+      .slide-border-frame {
+        display: none;
+      }
+      
+      .slide-title {
+        font-size: 1.2rem !important;
+        margin-bottom: 12px !important;
+        padding-bottom: 4px !important;
+      }
+      .slide-subtitle {
+        font-size: 0.65rem;
+        margin-bottom: 2px;
+      }
+      
+      /* Navigation footer controls */
+      .deck-controls {
+        height: 46px;
+        padding: 0 12px;
+      }
+      .btn-nav {
+        padding: 6px 12px;
+        font-size: 0.7rem;
+      }
+      .progress-track {
+        margin: 0 10px;
+      }
+      .slide-number {
+        font-size: 0.65rem;
+      }
+      .slide-dots {
+        display: none;
+      }
+      
+      /* General layout grids */
+      .card-grid {
+        gap: 10px;
+        margin-top: 10px;
+      }
+      .card {
+        padding: 10px 14px;
+        border-radius: 8px;
+      }
+      .card h3 {
+        font-size: 0.95rem;
+        margin-bottom: 4px;
+      }
+      .card p {
+        font-size: 0.78rem;
+        line-height: 1.4;
+      }
+      
+      /* Return to horizontal row on landscape width */
+      .timeline-row {
+        flex-wrap: nowrap !important;
+        gap: 0 !important;
+        margin-bottom: 8px;
+        padding-bottom: 8px;
+      }
+      .timeline-row::after {
+        display: block !important;
+        bottom: 8px;
+      }
+      .timeline-node {
+        width: 18% !important;
+      }
+      .timeline-detail-card {
+        padding: 10px;
+        min-height: auto;
+      }
+      .exam-alert-box {
+        margin-top: 8px;
+        padding: 8px 12px;
+        font-size: 0.78rem;
+      }
+      
+      /* Re-enable side-by-side grids since landscape has plenty of width */
+      div[style*="display:grid; grid-template-columns: 1.2fr 1fr"],
+      div[style*="display:grid; grid-template-columns:1.2fr 1.1fr"] {
+        grid-template-columns: 1.2fr 1fr !important;
+        gap: 12px !important;
+      }
+      
+      /* Arena Viewport in Landscape */
+      .arena-viewport {
+        height: 200px;
+        min-height: unset;
+      }
+      .arena-panel {
+        padding: 10px;
+      }
+      .arena-panel h3 {
+        font-size: 1.05rem;
+        margin-bottom: 4px;
+      }
+      .stat-list {
+        gap: 6px;
+        margin-top: 4px;
+      }
+      .stat-item {
+        gap: 2px;
+      }
+      .arena-compare {
+        grid-template-columns: 1fr 1fr !important;
+        overflow-y: auto;
+      }
+      .compare-side {
+        padding: 8px 12px;
+      }
+      .compare-athens-side {
+        border-right: 1px solid var(--border-color);
+        border-bottom: none;
+      }
+      
+      /* Glossary & Flashcards */
+      .glossary-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px;
+      }
+      .glossary-card {
+        padding: 10px;
+      }
+      .glossary-term {
+        font-size: 0.85rem;
+      }
+      .glossary-detail-box {
+        margin-top: 8px;
+        padding: 10px;
+      }
+      
+      .flashcards-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 8px;
+      }
+      .flashcard-wrapper {
+        height: 100px;
+      }
+      .flashcard-front, .flashcard-back {
+        padding: 6px 10px;
+        border-radius: 8px;
+      }
+      .flashcard-icon {
+        font-size: 0.95rem;
+        margin-bottom: 4px;
+      }
+      .flashcard-title {
+        font-size: 0.7rem;
+      }
+      .flashcard-answer {
+        font-size: 0.65rem;
+        line-height: 1.3;
+      }
+    }
   </style>
 </head>
 <body>
