@@ -867,9 +867,9 @@
 
   const wsFolder = 'revision 6';
   const wsMap = [
-    'page 1.jpeg', 'page 1.jpeg', 'page 2.jpeg', 'page 3.jpeg',
-    'page 4.jpeg', 'page 5.jpeg', 'page 6.jpeg', 'page 7.jpeg',
-    'page 8.jpeg'
+    'page1.jpeg', 'page1.jpeg', 'page2.jpeg', 'page3.jpeg',
+    'page4.jpeg', 'page5.jpeg', 'page6.jpeg', 'page7.jpeg',
+    'page8.jpeg'
   ];
   const wsLabels = [
     'Cover', 'Location & Founding', 'Political Evolution',
@@ -878,7 +878,7 @@
   ];
 
   function updateWs() {
-    document.getElementById('wsImg').src = wsFolder + '/' + (wsMap[cur] || 'page 1.jpeg');
+    document.getElementById('wsImg').src = wsFolder + '/' + (wsMap[cur] || 'page1.jpeg');
     document.getElementById('wsLabel').textContent = wsLabels[cur] || 'Reference';
   }
 
