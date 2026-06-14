@@ -1313,6 +1313,155 @@
         width: 45%;
       }
     }
+
+    @media (max-width: 768px) {
+      /* Header adjustments */
+      header {
+        padding: 0 12px;
+        height: 56px;
+      }
+      .brand-icon {
+        display: none;
+      }
+      .brand h1 {
+        font-size: 0.95rem;
+      }
+      .brand span {
+        display: none; /* Hide 'HK SYLLABUS' tag to save space */
+      }
+      header div[style*="font-size:0.7rem"] {
+        display: none !important; /* Hide keyboard shortcut instruction badge */
+      }
+      .btn-companion {
+        padding: 0 10px;
+        height: 34px;
+        font-size: 0.75rem;
+      }
+      .btn-companion span {
+        display: none; /* Hide 'Show Worksheet Companion' text on mobile, just show icon */
+      }
+      .btn-companion::after {
+        content: 'Worksheet'; /* Add a short label instead */
+      }
+      
+      /* Main content */
+      .slide-container {
+        padding: 16px;
+      }
+      .slide-title {
+        font-size: 1.4rem;
+        margin-bottom: 16px;
+        padding-bottom: 8px;
+      }
+      
+      /* Slide-specific elements */
+      .timeline-row {
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+      .timeline-row::after {
+        display: none;
+      }
+      .timeline-node {
+        width: 45%;
+      }
+      .timeline-detail-card {
+        padding: 16px;
+        min-height: auto;
+      }
+      
+      /* Slide 3 columns */
+      div[style*="display:grid; grid-template-columns: 1.2fr 1fr"] {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+      }
+      
+      /* Slide 5 compare mode columns */
+      .arena-compare {
+        grid-template-columns: 1fr;
+        overflow-y: auto;
+      }
+      .compare-side {
+        padding: 16px;
+        border-right: none;
+      }
+      .compare-athens-side {
+        border-bottom: 1px solid var(--border-color);
+      }
+      .arena-viewport {
+        min-height: auto;
+        height: 400px;
+      }
+      .btn-toggle-arena {
+        padding: 6px 12px;
+        font-size: 0.7rem;
+      }
+      
+      /* Slide 7 columns */
+      div[style*="display:grid; grid-template-columns:1.2fr 1.1fr"] {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+      }
+      
+      /* Glossary & Flashcards */
+      .glossary-grid {
+        grid-template-columns: 1fr;
+      }
+      .flashcards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      /* Controls footer */
+      .deck-controls {
+        height: 64px;
+        padding: 0 12px;
+      }
+      .btn-nav {
+        padding: 8px 12px;
+        font-size: 0.75rem;
+      }
+      .progress-track {
+        margin: 0 12px;
+      }
+      .slide-dots {
+        display: none; /* Hide dots on mobile to prevent overlapping */
+      }
+      
+      /* The Mobile Worksheet Overlay Engine (Absolute Fullscreen) */
+      .worksheet-companion {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100% !important;
+        height: 100%;
+        margin-right: 0 !important;
+        z-index: 20;
+        border-left: none;
+      }
+      .worksheet-companion.collapsed {
+        transform: translateX(100%);
+        margin-right: 0 !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .flashcards-grid {
+        grid-template-columns: 1fr;
+      }
+      .timeline-node {
+        width: 100%; /* Vertical stack on extremely small screens */
+        align-items: flex-start;
+        padding-left: 12px;
+      }
+      .timeline-dot-inner {
+        margin-bottom: 4px;
+      }
+      .timeline-label {
+        text-align: left;
+      }
+    }
   </style>
 </head>
 <body>
