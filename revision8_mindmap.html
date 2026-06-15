@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S1 History Revision 8 - Mind Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f14;
+    --bg-card: #181822;
+    --bg-hover: #22223a;
+    --border: #2a2a42;
+    --text: #e8e6e3;
+    --text-muted: #9a98a6;
+    --gold: #d4a84b;
+    --gold-dim: rgba(212,168,75,0.12);
+    --blue: #5b9bd5;
+    --blue-dim: rgba(91,155,213,0.1);
+    --purple: #9b6bcc;
+    --purple-dim: rgba(155,107,204,0.1);
+    --red: #c44a4a;
+    --green: #4a9c6d;
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Inter', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    font-size: 14px;
+  }
+
+  header { height: 52px; background: var(--bg-card); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; flex-shrink: 0; z-index: 10; }
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .brand svg { color: var(--gold); flex-shrink: 0; }
+  .brand h1 { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; letter-spacing: 0.5px; }
+  .brand h1 span { color: var(--gold); }
+  .brand .badge { font-size: 0.6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); background: rgba(255,255,255,0.04); border: 1px solid var(--border); padding: 2px 8px; border-radius: 3px; }
+  .header-right { display: flex; align-items: center; gap: 10px; }
+  .btn-back { background: transparent; border: 1px solid var(--border); color: var(--text-muted); height: 34px; padding: 0 14px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.2s; font-family: var(--font-body); font-size: 0.8rem; font-weight: 500; text-decoration: none; }
+  .btn-back:hover { background: var(--bg-hover); color: var(--gold); border-color: var(--gold); }
+  .btn-icon { background: transparent; border: 1px solid var(--border); color: var(--text-muted); width: 34px; height: 34px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; font-size: 0.85rem; }
+  .btn-icon:hover { background: var(--bg-hover); color: var(--gold); border-color: var(--gold); }
+
+  .viewport {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    padding: 20px;
+  }
+
+  .mindmap-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 1200px;
+    max-height: 800px;
+  }
+
+  /* SVG lines layer */
+  .lines-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Nodes layer */
+  .nodes-layer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+  }
+
+  .node {
+    position: absolute;
+    border-radius: 10px;
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-align: center;
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .node:hover {
+    transform: scale(1.05);
+    z-index: 5;
+  }
+
+  .node .title {
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .node .subtitle {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    line-height: 1.2;
+  }
+
+  .node-center {
+    background: linear-gradient(135deg, rgba(212,168,75,0.2), rgba(212,168,75,0.05));
+    border-color: var(--gold);
+    box-shadow: 0 0 30px rgba(212,168,75,0.15);
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 14px 24px;
+    border-radius: 14px;
+    min-width: 180px;
+  }
+
+  .node-branch {
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 10px 14px;
+    min-width: 130px;
+    max-width: 180px;
+  }
+
+  .node-branch .title { font-family: var(--font-display); font-size: 0.95rem; letter-spacing: 0.3px; }
+
+  .node-branch.branch-timeline { background: var(--blue-dim); border-color: var(--blue); }
+  .node-branch.branch-timeline:hover { box-shadow: 0 0 20px rgba(91,155,213,0.25); }
+
+  .node-branch.branch-feudal { background: var(--gold-dim); border-color: var(--gold); }
+  .node-branch.branch-feudal:hover { box-shadow: 0 0 20px rgba(212,168,75,0.25); }
+
+  .node-branch.branch-legacy { background: var(--purple-dim); border-color: var(--purple); }
+  .node-branch.branch-legacy:hover { box-shadow: 0 0 20px rgba(155,107,204,0.25); }
+
+  .node-branch.branch-christendom { background: rgba(196,74,74,0.08); border-color: var(--red); }
+  .node-branch.branch-christendom:hover { box-shadow: 0 0 20px rgba(196,74,74,0.2); }
+
+  .node-leaf {
+    font-size: 0.72rem;
+    padding: 6px 10px;
+    min-width: 100px;
+    max-width: 150px;
+    border-radius: 6px;
+    background: var(--bg-card);
+    border-color: var(--border);
+    font-weight: 400;
+  }
+
+  .node-leaf .title { font-weight: 500; font-size: 0.75rem; }
+  .node-leaf .subtitle { font-size: 0.6rem; }
+
+  .node-leaf:hover {
+    border-color: var(--text-muted);
+    background: var(--bg-hover);
+  }
+
+  .node-detail {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    min-width: 200px;
+    max-width: 280px;
+    font-size: 0.72rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 10;
+    text-align: left;
+  }
+
+  .node-detail.show { opacity: 1; }
+  .node-detail strong { color: var(--text); }
+
+  .legend {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 18px;
+    z-index: 3;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  @media (max-width: 768px) {
+    header { padding: 0 12px; }
+    .brand .badge { display: none; }
+    .viewport { padding: 10px; }
+    .node { transform-origin: center center; }
+    .node-center { font-size: 0.9rem; padding: 10px 16px; min-width: 120px; }
+    .node-branch { font-size: 0.75rem; padding: 6px 10px; min-width: 90px; max-width: 130px; }
+    .node-branch .title { font-size: 0.8rem; }
+    .node-leaf { font-size: 0.65rem; padding: 4px 8px; min-width: 70px; max-width: 110px; }
+    .node-leaf .title { font-size: 0.68rem; }
+    .legend { font-size: 0.6rem; gap: 10px; padding: 5px 12px; flex-wrap: wrap; }
+  }
+
+  @media (max-width: 500px) {
+    .node-center { font-size: 0.8rem; padding: 8px 12px; min-width: 90px; }
+    .node-branch { font-size: 0.65rem; padding: 4px 8px; min-width: 70px; max-width: 100px; }
+    .node-branch .title { font-size: 0.7rem; }
+    .node-leaf { font-size: 0.6rem; padding: 3px 6px; min-width: 55px; max-width: 80px; }
+    .node-leaf .title { font-size: 0.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+    <h1>Medieval Europe & <span>Christendom</span></h1>
+    <span class="badge">Mind Map · Revision 8</span>
+  </div>
+  <div class="header-right">
+    <a href="revision8.html" class="btn-back">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      Study Deck
+    </a>
+    <button class="btn-icon" id="zoomIn" title="Zoom In">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
+    </button>
+    <button class="btn-icon" id="zoomOut" title="Zoom Out">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M8 11h6"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="viewport" id="viewport">
+  <div class="mindmap-container" id="mindmap">
+    <svg class="lines-svg" id="linesSvg"></svg>
+    <div class="nodes-layer" id="nodesLayer"></div>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div>Timeline</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--gold)"></div>Feudal Society</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--purple)"></div>Legacy</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>Christendom</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const data = [
+  {
+    id: 'center',
+    label: 'Medieval Europe\n& Christendom',
+    cssClass: 'node-center',
+    x: 50, y: 50,
+    children: [
+      {
+        id: 'timeline',
+        label: 'Historical Timeline',
+        cssClass: 'branch-timeline',
+        x: 4, y: 22,
+        children: [
+          { id: 'start', label: 'AD 476\nFall of Western\nRoman Empire', detail: 'Marked the beginning of Medieval Times in Europe. Wars were frequent; classical civilization declined.', x: 2, y: 10 },
+          { id: 'two', label: 'Two Key\ndevelopments', detail: 'Feudal system was adopted. Christendom gradually formed.', x: 6, y: 10 },
+          { id: 'end', label: 'AD 1453\nFall of Eastern\nRoman Empire', detail: 'Marked the end of Medieval Times in Europe, leading into the Renaissance.', x: 10, y: 10 },
+        ]
+      },
+      {
+        id: 'feudal',
+        label: 'Feudal Society\n(封建社會)',
+        cssClass: 'branch-feudal',
+        x: 50, y: 6,
+        children: [
+          { id: 'class', label: 'Rigid Class\nStructure', detail: 'King → Upper Noble → Lower Noble/Knight → Peasants. Low social mobility — it was very difficult to change class.', x: 40, y: 2 },
+          { id: 'hereditary', label: 'Hereditary\nSystem', detail: 'Positions, titles, and lands passed down to heirs (繼承人).', x: 48, y: 2 },
+          { id: 'contract', label: 'Contractual\nRelationship', detail: 'Overlord (領主) grants land to vassals (附庸) in exchange for loyalty and service.', x: 56, y: 2 },
+          { id: 'manors', label: 'Manors &\nCastles', detail: 'Overlords set up manors with castles. Knights and peasants also lived within the manor.', x: 64, y: 2 },
+          { id: 'nobles', label: 'Strong\nNobles', detail: 'King was ruler in name only. Nobles had strong power and the king could not exercise power on their land.', x: 40, y: 10 },
+          { id: 'knights', label: 'Knights &\nChivalry', detail: 'Professional cavalry. Granted knighthood and lands. Rules: loyalty, bravery, diligence, protecting the weak, selfless sacrifice.', x: 60, y: 10 },
+        ]
+      },
+      {
+        id: 'legacy',
+        label: 'Legacy &\nSignificance',
+        cssClass: 'branch-legacy',
+        x: 96, y: 22,
+        children: [
+          { id: 'contractual', label: 'Contractual\nSpirit', detail: 'Both overlords and vassals valued rights and duties. Magna Carta (大憲章) and the US Constitution were based on this spirit.', x: 92, y: 10 },
+          { id: 'towns', label: 'Rise of\nTowns', detail: 'Craftsmen & merchants lived outside manors → towns revived. Urbanization started. Overlords\' control weakened.', x: 100, y: 10 },
+          { id: 'universities', label: 'Rise of\nUniversities', detail: 'Pursuit of knowledge beyond religion. Church schools grew into universities. Medicine, law, philosophy taught. Degree system (bachelor, master, doctor) and academic dress inherited from this era.', x: 96, y: 2 },
+        ]
+      },
+      {
+        id: 'christendom',
+        label: 'The Making of\nChristendom',
+        cssClass: 'branch-christendom',
+        x: 50, y: 92,
+        children: [
+          { id: 'dev-roman', label: 'Christianity in\nRoman Empire', detail: 'Christians were persecuted by Rome. Later, emperor granted religious freedom. In AD 380, Christianity became the official religion.', x: 26, y: 86 },
+          { id: 'split', label: 'The Great\nSplit (分裂)', detail: 'Church split with the Roman Empire: Eastern Orthodox (東正教會) & Roman Catholic (羅馬天主教會).', x: 38, y: 86 },
+          { id: 'influence', label: 'Church\nInfluence', detail: 'Very high position. Pope was leader — even kings had to obey. Pope could excommunicate. Church was wealthy (lands + taxes).', x: 50, y: 86 },
+          { id: 'functions', label: 'Church\nFunctions', detail: 'Political (crowned kings, mediate wars), Legal (courts, laws), Social (elderly, children, patients, roads), Educational (church schools, Latin), Cultural (preserved classics, monks copied texts).', x: 62, y: 86 },
+          { id: 'formation', label: 'Formation of\nChristendom', detail: 'Despite the split, Christianity continued to develop. With its spread, Christendom (基督教世界) appeared across Europe.', x: 74, y: 86 },
+        ]
+      },
+    ]
+  }
+];
+
+// Build layout — convert percentages to positions within container
+const W = 100, H = 100;
+
+function flatten(node, parentX, parentY) {
+  const items = [];
+  if (node.children) {
+    for (const child of node.children) {
+      items.push(child);
+      const sub = flatten(child, child.x, child.y);
+      items.push(...sub);
+    }
+  }
+  return items;
+}
+
+const allNodes = flatten(data[0]);
+
+function render() {
+  const container = document.getElementById('mindmap');
+  const svg = document.getElementById('linesSvg');
+  const layer = document.getElementById('nodesLayer');
+
+  // Clear
+  svg.innerHTML = '';
+  layer.innerHTML = '';
+
+  const rect = container.getBoundingClientRect();
+  const scaleW = rect.width / W;
+  const scaleH = rect.height / H;
+
+  // Draw lines
+  function drawLine(x1, y1, x2, y2, color) {
+    const ns = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    ns.setAttribute('x1', (x1 * scaleW).toFixed(1));
+    ns.setAttribute('y1', (y1 * scaleH).toFixed(1));
+    ns.setAttribute('x2', (x2 * scaleW).toFixed(1));
+    ns.setAttribute('y2', (y2 * scaleH).toFixed(1));
+    ns.setAttribute('stroke', color || 'rgba(255,255,255,0.08)');
+    ns.setAttribute('stroke-width', '1.5');
+    ns.setAttribute('stroke-dasharray', '4,3');
+    svg.appendChild(ns);
+  }
+
+  function drawCurve(x1, y1, x2, y2, color) {
+    const ns = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    const mx = (x1 + x2) / 2;
+    const cx1 = (x1 + mx) / 2;
+    const cx2 = (mx + x2) / 2;
+    const d = `M${(x1*scaleW).toFixed(1)},${(y1*scaleH).toFixed(1)} Q${(cx1*scaleW).toFixed(1)},${(y1*scaleH).toFixed(1)} ${(mx*scaleW).toFixed(1)},${((y1+y2)/2*scaleH).toFixed(1)} Q${(cx2*scaleW).toFixed(1)},${(y2*scaleH).toFixed(1)} ${(x2*scaleW).toFixed(1)},${(y2*scaleH).toFixed(1)}`;
+    ns.setAttribute('d', d);
+    ns.setAttribute('fill', 'none');
+    ns.setAttribute('stroke', color || 'rgba(255,255,255,0.07)');
+    ns.setAttribute('stroke-width', '1.2');
+    svg.appendChild(ns);
+  }
+
+  const cx = 50, cy = 50;
+
+  for (const branch of data[0].children) {
+    const colorMap = {
+      'timeline': 'rgba(91,155,213,0.3)',
+      'feudal': 'rgba(212,168,75,0.3)',
+      'legacy': 'rgba(155,107,204,0.3)',
+      'christendom': 'rgba(196,74,74,0.3)',
+    };
+    const c = colorMap[branch.id] || 'rgba(255,255,255,0.1)';
+
+    // Center to branch
+    drawCurve(cx, cy, branch.x, branch.y, c);
+
+    // Branch to leaves
+    if (branch.children) {
+      for (const leaf of branch.children) {
+        drawLine(branch.x, branch.y, leaf.x, leaf.y, c);
+      }
+    }
+  }
+
+  // Render nodes
+  function createNode(node, isCenter) {
+    const el = document.createElement('div');
+    el.className = 'node ' + (isCenter ? 'node-center' : 'node-branch ' + (node.cssClass || ''));
+    el.style.left = (node.x * scaleW - (isCenter ? 90 : 65)) + 'px';
+    el.style.top = (node.y * scaleH - 20) + 'px';
+
+    const lines = node.label.split('\n');
+    el.innerHTML = '<div class="title">' + lines.join('</div><div class="title">') + '</div>';
+
+    if (node.detail) {
+      const detail = document.createElement('div');
+      detail.className = 'node-detail';
+      detail.innerHTML = node.detail;
+      el.appendChild(detail);
+      el.addEventListener('mouseenter', () => detail.classList.add('show'));
+      el.addEventListener('mouseleave', () => detail.classList.remove('show'));
+    }
+
+    layer.appendChild(el);
+    return el;
+  }
+
+  // Center
+  createNode(data[0], true);
+
+  // Branches + leaves
+  for (const branch of data[0].children) {
+    createNode(branch, false);
+    if (branch.children) {
+      for (const leaf of branch.children) {
+        const el = document.createElement('div');
+        el.className = 'node node-leaf';
+        el.style.left = (leaf.x * scaleW - 45) + 'px';
+        el.style.top = (leaf.y * scaleH - 14) + 'px';
+
+        const lines = leaf.label.split('\n');
+        el.innerHTML = '<div class="title">' + lines.join('</div><div class="title">') + '</div>';
+
+        if (leaf.detail) {
+          const detail = document.createElement('div');
+          detail.className = 'node-detail';
+          detail.innerHTML = leaf.detail;
+          el.appendChild(detail);
+          el.addEventListener('mouseenter', () => detail.classList.add('show'));
+          el.addEventListener('mouseleave', () => detail.classList.remove('show'));
+        }
+
+        layer.appendChild(el);
+      }
+    }
+  }
+}
+
+// Zoom
+let zoomLevel = 1;
+document.getElementById('zoomIn').addEventListener('click', () => {
+  zoomLevel = Math.min(zoomLevel + 0.15, 2);
+  document.querySelector('.mindmap-container').style.transform = `scale(${zoomLevel})`;
+  document.querySelector('.mindmap-container').style.transformOrigin = 'center center';
+});
+document.getElementById('zoomOut').addEventListener('click', () => {
+  zoomLevel = Math.max(zoomLevel - 0.15, 0.5);
+  document.querySelector('.mindmap-container').style.transform = `scale(${zoomLevel})`;
+  document.querySelector('.mindmap-container').style.transformOrigin = 'center center';
+});
+
+window.addEventListener('resize', render);
+render();
+</script>
+</body>
+</html>
