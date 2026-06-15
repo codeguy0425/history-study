@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S1 History Revision 8 - Medieval Europe & Christendom</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f14;
+    --bg-card: #181822;
+    --bg-hover: #22223a;
+    --border: #2a2a42;
+    --text: #e8e6e3;
+    --text-muted: #9a98a6;
+    --gold: #d4a84b;
+    --gold-dim: rgba(212, 168, 75, 0.15);
+    --blue: #5b9bd5;
+    --blue-dim: rgba(91, 155, 213, 0.12);
+    --purple: #9b6bcc;
+    --purple-dim: rgba(155, 107, 204, 0.12);
+    --red: #c44a4a;
+    --green: #4a9c6d;
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Inter', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    font-size: 15px;
+  }
+
+  header { height: 56px; background: var(--bg-card); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; flex-shrink: 0; z-index: 10; }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand svg { color: var(--gold); }
+  .brand h1 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; letter-spacing: 0.5px; }
+  .brand h1 span { color: var(--gold); }
+  .brand .badge { font-size: 0.6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); background: rgba(255,255,255,0.04); border: 1px solid var(--border); padding: 2px 8px; border-radius: 3px; }
+  .header-right { display: flex; align-items: center; gap: 10px; }
+  .btn-icon { background: transparent; border: 1px solid var(--border); color: var(--text-muted); width: 34px; height: 34px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; font-size: 0.85rem; }
+  .btn-icon:hover { background: var(--bg-hover); color: var(--gold); border-color: var(--gold); }
+
+  .app { flex: 1; display: flex; overflow: hidden; }
+  .slide-area { flex: 1; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+  .slide-viewport { flex: 1; overflow-y: auto; padding: 32px 48px; display: flex; justify-content: center; scroll-behavior: smooth; }
+  .slide-viewport::-webkit-scrollbar { width: 4px; }
+  .slide-viewport::-webkit-scrollbar-track { background: transparent; }
+  .slide-viewport::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .slide { display: none; width: 100%; max-width: 860px; animation: fadeUp 0.35s ease both; }
+  .slide.active { display: block; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+  .slide-label { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); margin-bottom: 6px; }
+  .slide-title { font-family: var(--font-display); font-size: 2rem; font-weight: 700; line-height: 1.2; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); position: relative; }
+  .slide-title::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 50px; height: 2px; background: var(--gold); }
+  .slide-subtitle { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.6; }
+
+  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 20px 24px; margin-bottom: 16px; transition: border-color 0.2s; }
+  .card:hover { border-color: rgba(255,255,255,0.08); }
+  .card-gold { border-left: 3px solid var(--gold); }
+  .card-blue { border-left: 3px solid var(--blue); }
+  .card-purple { border-left: 3px solid var(--purple); }
+  .card-red { border-left: 3px solid var(--red); }
+  .card-green { border-left: 3px solid var(--green); }
+  .card h3 { font-family: var(--font-display); font-size: 1.1rem; margin-bottom: 6px; color: var(--gold); }
+  .card h4 { font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; color: var(--text); }
+  .card p, .card li { font-size: 0.85rem; line-height: 1.65; color: var(--text-muted); }
+  .card ul { list-style: none; padding: 0; }
+  .card ul li::before { content: '▸ '; color: var(--gold); }
+  .card ul li { padding: 2px 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+
+  .tag { display: inline-block; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; padding: 2px 8px; border-radius: 3px; margin-bottom: 8px; }
+  .tag-gold { background: var(--gold-dim); color: var(--gold); }
+  .tag-blue { background: var(--blue-dim); color: var(--blue); }
+  .tag-purple { background: var(--purple-dim); color: var(--purple); }
+  .tag-red { background: rgba(196, 74, 74, 0.12); color: var(--red); }
+  .tag-green { background: rgba(74, 156, 109, 0.12); color: var(--green); }
+
+  .exam-tip { background: var(--gold-dim); border-radius: 6px; padding: 12px 16px; margin-top: 12px; font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
+  .exam-tip strong { color: var(--gold); }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 12px 0; }
+  .compare-table th { background: var(--bg-card); padding: 8px 12px; text-align: left; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid var(--border); color: var(--text-muted); }
+  .compare-table td { padding: 7px 12px; border-bottom: 1px solid var(--border); color: var(--text-muted); vertical-align: top; }
+  .compare-table td:first-child { font-weight: 600; color: var(--text); }
+  .compare-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  .hierarchy { display: flex; flex-direction: column; align-items: center; gap: 6px; margin: 16px 0; }
+  .h-level { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 10px 20px; text-align: center; min-width: 200px; font-size: 0.85rem; font-weight: 500; }
+  .h-level .sub { font-size: 0.65rem; color: var(--text-muted); font-weight: 400; }
+  .h-arrow { color: var(--gold); font-size: 0.8rem; }
+
+  .nav-bar { height: 60px; background: var(--bg-card); border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; flex-shrink: 0; }
+  .nav-btn { background: transparent; border: 1px solid var(--border); color: var(--text-muted); padding: 8px 16px; border-radius: 6px; cursor: pointer; font-family: var(--font-body); font-size: 0.8rem; font-weight: 500; display: flex; align-items: center; gap: 6px; transition: all 0.2s; }
+  .nav-btn:hover:not(:disabled) { border-color: var(--gold); color: var(--gold); }
+  .nav-btn:disabled { opacity: 0.3; cursor: default; }
+  .nav-info { font-size: 0.7rem; color: var(--text-muted); font-weight: 500; }
+
+  .worksheet { width: 0; overflow: hidden; background: var(--bg-card); border-left: 1px solid var(--border); transition: width 0.3s ease; display: flex; flex-direction: column; flex-shrink: 0; }
+  .worksheet.open { width: 360px; }
+  .ws-header { height: 44px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; border-bottom: 1px solid var(--border); flex-shrink: 0; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gold); }
+  .ws-header button { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1rem; }
+  .ws-body { flex: 1; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #0a0a0e; position: relative; }
+  .ws-body img { max-width: 100%; max-height: 100%; object-fit: contain; cursor: grab; transition: transform 0.1s; }
+  .ws-body img:active { cursor: grabbing; }
+  .ws-footer { padding: 8px 16px; font-size: 0.65rem; color: var(--text-muted); text-align: center; border-top: 1px solid var(--border); flex-shrink: 0; }
+
+  @media (max-width: 900px) { .slide-viewport { padding: 24px 20px; } .slide-title { font-size: 1.6rem; } .grid-2, .grid-3 { grid-template-columns: 1fr; } .brand .badge { display: none; } .brand h1 { font-size: 0.95rem; } header { padding: 0 12px; } }
+  @media (max-width: 640px) { .slide-viewport { padding: 16px 14px; } .slide-title { font-size: 1.3rem; margin-bottom: 14px; padding-bottom: 8px; } .slide-subtitle { font-size: 0.8rem; } .card { padding: 14px 16px; margin-bottom: 12px; } .card p, .card li { font-size: 0.78rem; } .nav-bar { height: 50px; padding: 0 12px; } .nav-btn { font-size: 0.7rem; padding: 6px 10px; } .nav-info { font-size: 0.6rem; } .exam-tip { font-size: 0.72rem; } header { height: 46px; } .header-right span { display: none; } .btn-icon { width: 30px; height: 30px; font-size: 0.75rem; } .worksheet.open { width: 100%; position: absolute; inset: 0; z-index: 20; } }
+  @media (max-height: 500px) and (orientation: landscape) {
+    header { height: 38px; padding: 0 10px; } .brand svg { width: 16px; height: 16px; } .brand h1 { font-size: 0.8rem; } .btn-icon { width: 26px; height: 26px; font-size: 0.65rem; }
+    .slide-viewport { padding: 10px 16px; align-items: flex-start; } .slide-title { font-size: 1.1rem; margin-bottom: 8px; padding-bottom: 6px; border-bottom-width: 1px; } .slide-title::after { width: 30px; height: 1px; } .slide-label { font-size: 0.55rem; margin-bottom: 2px; } .slide-subtitle { font-size: 0.7rem; margin-bottom: 8px; }
+    .card { padding: 8px 12px; margin-bottom: 6px; border-radius: 5px; } .card h3 { font-size: 0.8rem; margin-bottom: 3px; } .card h4 { font-size: 0.72rem; } .card p, .card li { font-size: 0.68rem; line-height: 1.45; } .card ul li { padding: 1px 0; font-size: 0.68rem; } .tag { font-size: 0.5rem; padding: 1px 5px; margin-bottom: 4px; } .exam-tip { font-size: 0.65rem; padding: 6px 10px; margin-top: 6px; }
+    .compare-table { font-size: 0.6rem; margin: 6px 0; } .compare-table th { padding: 3px 6px; font-size: 0.6rem; } .compare-table td { padding: 2px 6px; }
+    .nav-bar { height: 38px; padding: 0 10px; } .nav-btn { font-size: 0.6rem; padding: 4px 8px; } .nav-info { font-size: 0.55rem; }
+    .worksheet.open { width: 60%; position: absolute; right: 0; top: 0; bottom: 0; z-index: 20; } .ws-header { height: 34px; padding: 0 10px; font-size: 0.6rem; } .ws-footer { font-size: 0.5rem; padding: 4px 10px; }
+    .grid-2, .grid-3 { grid-template-columns: 1fr 1fr; gap: 8px; } body { overflow: auto; } .app { overflow: auto; } .slide-area { overflow: visible; } .slide-viewport { overflow: visible; }
+  }
+  @media (max-height: 380px) and (orientation: landscape) {
+    .slide-viewport { padding: 6px 12px; } .slide-title { font-size: 0.95rem; margin-bottom: 5px; padding-bottom: 4px; } .slide-subtitle { font-size: 0.6rem; } .card { padding: 5px 8px; margin-bottom: 4px; } .card p, .card li { font-size: 0.6rem; line-height: 1.35; } .card h3 { font-size: 0.72rem; } .exam-tip { font-size: 0.55rem; padding: 4px 8px; }
+    .nav-bar { height: 32px; } .nav-btn { font-size: 0.55rem; padding: 3px 6px; } .nav-info { font-size: 0.5rem; } .compare-table { font-size: 0.5rem; } .compare-table th, .compare-table td { padding: 2px 4px; } header { height: 32px; } .brand h1 { font-size: 0.7rem; } .btn-icon { width: 22px; height: 22px; font-size: 0.55rem; } .tag { font-size: 0.45rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 10h16"/><path d="M12 2 2 6v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6z"/><path d="M8 10v10"/><path d="M12 10v10"/><path d="M16 10v10"/></svg>
+    <div><h1>Medieval Europe <span>· Revision 8</span></h1></div>
+    <span class="badge">S1 History · HK</span>
+  </div>
+  <div class="header-right">
+    <span style="font-size:0.65rem;color:var(--text-muted);">← →</span>
+    <button class="btn-icon" id="themeBtn" title="Toggle theme">☀</button>
+    <button class="btn-icon" id="wsToggle" title="Worksheet">📄</button>
+  </div>
+</header>
+
+<div class="app">
+  <div class="slide-area">
+    <div class="slide-viewport" id="viewport">
+
+      <!-- SLIDE 1: TITLE -->
+      <div class="slide active">
+        <div style="text-align:center;padding:40px 0 20px;">
+          <div style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-bottom:16px;">S1 World History · Final Exam Revision</div>
+          <h2 style="font-family:var(--font-display);font-size:2.4rem;font-weight:700;line-height:1.1;margin-bottom:10px;">Medieval Europe &amp;<br>the Making of Christendom</h2>
+          <p style="font-size:1.1rem;color:var(--purple);margin-bottom:24px;">Feudal Society · Knights &amp; Chivalry · The Church · Legacy</p>
+          <div class="card card-gold" style="text-align:left;">
+            <h3>👨‍🏫 Exam Preparation Tips</h3>
+            <ul>
+              <li><strong>Timeline:</strong> Medieval times = AD 476 (fall of W. Rome) to AD 1453 (fall of E. Rome) — ~1000 years</li>
+              <li><strong>Feudal society:</strong> Rigid class structure, hereditary system, contractual overlord-vassal relationships</li>
+              <li><strong>Four classes:</strong> King → Upper nobles → Lower nobles/Knights → Peasants</li>
+              <li><strong>Church influence:</strong> Pope crowned kings, could excommunicate, owned lands, provided education &amp; social services</li>
+              <li><strong>Legacy:</strong> Contractual spirit (Magna Carta), rise of towns, universities (degree system)</li>
+              <li>Click <strong>📄</strong> to view worksheet pages alongside the slides</li>
+            </ul>
+          </div>
+          <button class="nav-btn" style="margin:20px auto 0;border-color:var(--gold);color:var(--gold);" onclick="go(1)">Begin Revision →</button>
+        </div>
+      </div>
+
+      <!-- SLIDE 2: MEDIEVAL TIMES OVERVIEW -->
+      <div class="slide">
+        <div class="slide-label">Chronology</div>
+        <h2 class="slide-title">Europe Enters Medieval Times</h2>
+        <p class="slide-subtitle">Medieval times lasted about 1000 years — from the fall of the Western Roman Empire to the fall of the Eastern Roman Empire.</p>
+
+        <div class="grid-2" style="margin-bottom:12px;">
+          <div class="card card-red">
+            <span class="tag tag-red">Start</span>
+            <h4>AD 476 — Fall of Western Roman Empire</h4>
+            <p>The Western Roman Empire fell to Germanic peoples. This marked the <strong>beginning</strong> of the Medieval period in Europe.</p>
+          </div>
+          <div class="card card-blue">
+            <span class="tag tag-blue">End</span>
+            <h4>AD 1453 — Fall of Eastern Roman Empire</h4>
+            <p>The Eastern Roman (Byzantine) Empire fell to the Ottoman Turks. This marked the <strong>end</strong> of the Medieval period.</p>
+          </div>
+        </div>
+
+        <div class="card card-gold">
+          <h4>📅 Key Features of Early Medieval Times</h4>
+          <ul>
+            <li><strong>Wars</strong> were frequent in Western Europe</li>
+            <li><strong>Classical civilization</strong> (Greco-Roman) declined</li>
+            <li>The <strong>feudal system (封建制度)</strong> was adopted</li>
+            <li><strong>Christendom (基督教世界)</strong> gradually formed</li>
+          </ul>
+        </div>
+
+        <div class="card card-purple">
+          <span class="tag tag-purple">Timeline</span>
+          <h4>⏳ European History Overview</h4>
+          <p style="text-align:center;font-size:0.8rem;color:var(--text-muted);">
+            Prehistoric → Historic → <strong style="color:var(--gold);">Ancient (4000 BC – AD 476)</strong> → <strong style="color:var(--purple);">Medieval (AD 476 – 1453)</strong> → Modern
+          </p>
+          <div class="exam-tip"><strong>📝 Already Covered in Revision 5:</strong> Medieval times began with the <strong>fall of the Western Roman Empire</strong> (AD 476) and ended with the <strong>fall of the Eastern Roman Empire</strong> (AD 1453).</div>
+        </div>
+      </div>
+
+      <!-- SLIDE 3: FEUDAL SOCIETY - CLASS STRUCTURE -->
+      <div class="slide">
+        <div class="slide-label">Feudal Society</div>
+        <h2 class="slide-title">Rigid Class Structure &amp; Hereditary System</h2>
+        <p class="slide-subtitle">Medieval European society was organised into a strict hierarchy with very low social mobility.</p>
+
+        <div class="hierarchy">
+          <div class="h-level" style="border-color:var(--gold);">👑 King<div class="sub">Ruler in name — often weak in practice</div></div>
+          <div class="h-arrow">▼</div>
+          <div class="h-level" style="border-color:var(--purple);">🏛️ Upper Nobles<div class="sub">Dukes, earls — owned large estates</div></div>
+          <div class="h-arrow">▼</div>
+          <div class="h-level" style="border-color:var(--blue);">⚔️ Lower Nobles / Knights (騎士)<div class="sub">Professional cavalry — granted knighthood</div></div>
+          <div class="h-arrow">▼</div>
+          <div class="h-level" style="border-color:var(--red);">🌾 Peasants / Serfs (農奴)<div class="sub">Worked the land — lowest class</div></div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card card-red">
+            <span class="tag tag-red">Low Social Mobility</span>
+            <h4>🔒 Rigid Class Structure</h4>
+            <p>It was <strong>very difficult</strong> for people to change their social class. You were born into a class and usually stayed there for life.</p>
+          </div>
+          <div class="card card-blue">
+            <span class="tag tag-blue">Inherited</span>
+            <h4>📜 Hereditary System (世襲制度)</h4>
+            <p>People passed their <strong>positions, titles, and lands</strong> to their <strong>heirs (繼承人)</strong>. A noble's son became a noble; a peasant's child remained a peasant.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 4: CONTRACTUAL RELATIONSHIPS -->
+      <div class="slide">
+        <div class="slide-label">Feudal System</div>
+        <h2 class="slide-title">Overlord-Vassal Contractual Relationships</h2>
+        <p class="slide-subtitle">In feudal society, every level of the hierarchy was linked by a contract — land in exchange for loyalty and service.</p>
+
+        <div class="card card-gold">
+          <span class="tag tag-gold">The Feudal Contract</span>
+          <h4>🤝 How It Worked</h4>
+          <p>An <strong>overlord (領主)</strong> granted land (fief) to his <strong>vassal (附庸)</strong>. In return, the vassal promised <strong>loyalty, military service, and taxes</strong>.</p>
+        </div>
+
+        <table class="compare-table">
+          <tr><th style="width:22%;">Overlord</th><th style="width:16%;">→ Gave →</th><th style="width:22%;">Vassal</th><th>Duty of Vassal</th></tr>
+          <tr><td>👑 King</td><td style="text-align:center;color:var(--gold);">land</td><td>Upper Nobles</td><td>Loyalty to the king, military service</td></tr>
+          <tr><td>🏛️ Upper Nobles</td><td style="text-align:center;color:var(--gold);">land</td><td>Lower Nobles (Knights)</td><td>Protection, military service</td></tr>
+          <tr><td>⚔️ Lower Nobles</td><td style="text-align:center;color:var(--gold);">land to farm</td><td>Peasants / Serfs</td><td>Work the land, pay taxes, provide food</td></tr>
+        </table>
+
+        <div class="grid-2">
+          <div class="card card-red">
+            <h4>🏰 Manors (莊園)</h4>
+            <p>Overlords set up <strong>manors</strong> where they lived in <strong>castles (堡壘)</strong>. Knights and peasants also lived in the manor. The manor was a self-sufficient community.</p>
+          </div>
+          <div class="card card-red">
+            <h4>👑 Strong Nobles, Weak King</h4>
+            <p>Nobles had <strong>strong power</strong>. The king was the ruler <strong>in name (名義上)</strong> only. He could not exercise power on his vassal's land without permission.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 5: KNIGHTS & CHIVALRY -->
+      <div class="slide">
+        <div class="slide-label">Knights</div>
+        <h2 class="slide-title">Knights &amp; the Code of Chivalry</h2>
+        <p class="slide-subtitle">Knights were the professional cavalry of medieval Europe, bound by a strict code of honour.</p>
+
+        <div class="grid-2">
+          <div class="card card-blue">
+            <span class="tag tag-blue">Who were knights?</span>
+            <h4>⚔️ Professional Cavalry</h4>
+            <ul>
+              <li>Knights were <strong>professional cavalry (專業騎兵)</strong></li>
+              <li>The king and upper nobles granted them <strong>knighthood (騎士身份)</strong> and <strong>lands</strong></li>
+              <li>They formed the military backbone of feudal society</li>
+            </ul>
+          </div>
+          <div class="card card-gold">
+            <span class="tag tag-gold">Chivalry</span>
+            <h4>🛡️ Rules of Chivalry (騎士精神)</h4>
+            <ul>
+              <li><strong>Loyalty (忠心)</strong> — to overlord and king</li>
+              <li><strong>Bravery (勇敢)</strong> — in battle</li>
+              <li><strong>Diligence (勤奮)</strong> — in duty</li>
+              <li><strong>Protecting the weak</strong></li>
+              <li><strong>Selfless sacrifice (無私犧牲)</strong></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exam-tip"><strong>📝 Textbook Reference:</strong> Read the comics about chivalry and how a boy became a knight in Textbook P.123. This is a common exam source.</div>
+      </div>
+
+      <!-- SLIDE 6: LEGACY OF MEDIEVAL CIVILIZATION -->
+      <div class="slide">
+        <div class="slide-label">Legacy</div>
+        <h2 class="slide-title">Legacy &amp; Significance of Medieval Civilization</h2>
+        <p class="slide-subtitle">The Middle Ages left lasting contributions to modern political, urban, and educational systems.</p>
+
+        <div class="grid-2">
+          <div class="card card-gold">
+            <span class="tag tag-gold">Contractual Spirit</span>
+            <h4>📜 合約精神 &amp; Constitution</h4>
+            <p>Both overlords and vassals valued their <strong>feudal rights and duties</strong>. The <strong>contractual spirit (合約精神)</strong> became a social norm. <strong>Magna Carta (大憲章)</strong> of England and the US Constitution were based on this principle.</p>
+          </div>
+          <div class="card card-blue">
+            <span class="tag tag-blue">Urbanization</span>
+            <h4>🏙️ Rise of Towns (城鎮興起)</h4>
+            <p>Craftsmen and merchants started living outside manors. Their areas developed into <strong>towns</strong>. Overlords' control weakened. <strong>Urbanization (城市化)</strong> began, attracting more people.</p>
+          </div>
+        </div>
+
+        <div class="card card-purple">
+          <span class="tag tag-purple">Education</span>
+          <h4>🎓 Rise of Universities</h4>
+          <p>Townsmen pursued knowledge beyond religion. Church schools evolved into <strong>universities</strong> teaching medicine, law, and philosophy. Present-day <strong>degree system</strong> (bachelor, master, doctor) and <strong>academic dress (學袍)</strong> are traditions inherited from Medieval Times.</p>
+        </div>
+
+        <div class="exam-tip"><strong>📝 Exam Link:</strong> The contractual spirit of feudalism → Magna Carta → modern constitutions. This is a key <strong>cause-and-effect</strong> chain!</div>
+      </div>
+
+      <!-- SLIDE 7: DEVELOPMENT OF CHRISTIANITY -->
+      <div class="slide">
+        <div class="slide-label">Christendom</div>
+        <h2 class="slide-title">The Making of Christendom</h2>
+        <p class="slide-subtitle">Christianity grew from a persecuted faith to the official religion of Rome, then shaped all of medieval Europe.</p>
+
+        <div class="card card-red">
+          <span class="tag tag-red">Ancient Times</span>
+          <h4>⛪ Development of Christianity in the Roman Empire</h4>
+          <ul>
+            <li>Christians were <strong>persecuted (迫害)</strong> by the Roman government for not worshipping Roman gods and emperors</li>
+            <li>Later, a Roman emperor stopped persecutions and granted <strong>religious freedom (宗教自由)</strong></li>
+            <li>In <strong>AD 380</strong>, Christianity became the <strong>official religion (官方宗教)</strong> of the Roman Empire</li>
+            <li>The number of Christians <strong>increased</strong> dramatically</li>
+          </ul>
+        </div>
+
+        <div class="grid-2">
+          <div class="card card-purple">
+            <span class="tag tag-purple">The Great Split</span>
+            <h4>✝️ Split in Christianity</h4>
+            <p>When the Roman Empire split into East and West, the Church also split:</p>
+            <ul>
+              <li><strong>Eastern Orthodox Church (東正教會)</strong> — in the East</li>
+              <li><strong>Roman Catholic Church (羅馬天主教會)</strong> — in the West</li>
+            </ul>
+          </div>
+          <div class="card card-gold">
+            <span class="tag tag-gold">Christendom</span>
+            <h4>🌍 Formation of Christendom</h4>
+            <p>Despite the split, Christianity continued to <strong>develop</strong> across Europe. With its spread, <strong>Christendom (基督教世界)</strong> emerged. The Roman Catholic Church's influence in Western Europe grew continuously.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 8: INFLUENCE & FUNCTIONS OF THE CHURCH -->
+      <div class="slide">
+        <div class="slide-label">The Church</div>
+        <h2 class="slide-title">Influence &amp; Functions of the Church</h2>
+        <p class="slide-subtitle">The Church had a very high position among Europeans and influenced every aspect of life.</p>
+
+        <div class="card card-gold">
+          <span class="tag tag-gold">Power of the Pope</span>
+          <h4>👑 The Pope (教皇) — Leader of the Church</h4>
+          <ul>
+            <li>Everyone, including the <strong>king</strong>, had to obey the Pope</li>
+            <li>The Pope could <strong>excommunicate (驅逐出教會)</strong> kings and nobles who disobeyed</li>
+            <li>The Church was <strong>wealthy</strong> — owned lots of lands, collected taxes, received possessions from nobles</li>
+          </ul>
+        </div>
+
+        <div class="grid-2">
+          <div class="card card-red">
+            <span class="tag tag-red">Political</span>
+            <h4>🏛️ Political Function</h4>
+            <p>The king had to be <strong>crowned (加冕)</strong> by the Pope. The Pope settled disputes and mediated wars, helping <strong>maintain political stability</strong> in Europe.</p>
+          </div>
+          <div class="card card-blue">
+            <span class="tag tag-blue">Legal</span>
+            <h4>⚖️ Legal Function</h4>
+            <p>The Church made <strong>laws</strong> and set up <strong>courts (法庭)</strong>. This helped <strong>maintain law and order</strong>.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="card card-green">
+            <span class="tag tag-green">Social</span>
+            <h4>🤝 Social Services</h4>
+            <p>The Church looked after the elderly and children, treated patients, and built roads and bridges.</p>
+          </div>
+          <div class="card card-purple">
+            <span class="tag tag-purple">Educational</span>
+            <h4>📚 Church Schools</h4>
+            <p>The Church set up many <strong>church schools</strong> teaching <strong>Latin</strong> and <strong>religious knowledge</strong>.</p>
+          </div>
+          <div class="card card-gold">
+            <span class="tag tag-gold">Cultural</span>
+            <h4>📖 Preserving Classics</h4>
+            <p><strong>Monks (教士)</strong> in monasteries <strong>copied ancient texts</strong> and classics, preserving classical civilization.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="nav-bar">
+      <button class="nav-btn" id="prevBtn" onclick="prev()">← Previous</button>
+      <span class="nav-info" id="slideInfo">Slide 1 of 8</span>
+      <button class="nav-btn" id="nextBtn" onclick="next()">Next →</button>
+    </div>
+  </div>
+
+  <div class="worksheet" id="wsPanel">
+    <div class="ws-header">
+      <span>📄 Worksheet Reference</span>
+      <button onclick="toggleWs()">✕</button>
+    </div>
+    <div class="ws-body">
+      <img id="wsImg" src="" alt="Worksheet">
+    </div>
+    <div class="ws-footer" id="wsLabel">Page 1</div>
+  </div>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let cur = 0;
+
+  function go(i) { cur = i; update(); }
+  function next() { if (cur < slides.length - 1) { cur++; update(); } }
+  function prev() { if (cur > 0) { cur--; update(); } }
+  function update() {
+    slides.forEach((s, i) => s.classList.toggle('active', i === cur));
+    document.getElementById('prevBtn').disabled = cur === 0;
+    document.getElementById('nextBtn').disabled = cur === slides.length - 1;
+    document.getElementById('slideInfo').textContent = `Slide ${cur + 1} of ${slides.length}`;
+    document.getElementById('viewport').scrollTop = 0;
+    updateWs();
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+  });
+
+  const wsFolder = 'revision 8';
+  const wsMap = [
+    'page1.jpeg', 'page1.jpeg', 'page2.jpeg', 'page3.jpeg',
+    'page4.jpeg', 'page5.jpeg', 'page6.jpeg', 'page7.jpeg'
+  ];
+  const wsLabels = [
+    'Cover', 'Medieval Times Overview', 'Feudal Class Structure',
+    'Overlord-Vassal Relationships', 'Knights & Chivalry',
+    'Legacy of Medieval Civilization', 'Development of Christianity',
+    'Influence of the Church'
+  ];
+
+  function updateWs() {
+    document.getElementById('wsImg').src = wsFolder + '/' + (wsMap[cur] || 'page1.jpeg');
+    document.getElementById('wsLabel').textContent = wsLabels[cur] || 'Reference';
+  }
+
+  function toggleWs() { document.getElementById('wsPanel').classList.toggle('open'); }
+  document.getElementById('wsToggle').onclick = toggleWs;
+
+  let dark = true;
+  document.getElementById('themeBtn').onclick = () => {
+    dark = !dark;
+    const root = document.documentElement;
+    if (dark) {
+      root.style.setProperty('--bg', '#0f0f14'); root.style.setProperty('--bg-card', '#181822');
+      root.style.setProperty('--bg-hover', '#22223a'); root.style.setProperty('--border', '#2a2a42');
+      root.style.setProperty('--text', '#e8e6e3'); root.style.setProperty('--text-muted', '#9a98a6');
+      document.getElementById('themeBtn').textContent = '☀';
+    } else {
+      root.style.setProperty('--bg', '#f5f3ef'); root.style.setProperty('--bg-card', '#ffffff');
+      root.style.setProperty('--bg-hover', '#f0ede8'); root.style.setProperty('--border', '#d6d2ca');
+      root.style.setProperty('--text', '#1a1a1a'); root.style.setProperty('--text-muted', '#666666');
+      document.getElementById('themeBtn').textContent = '🌙';
+    }
+  };
+
+  let isPan = false, sx, sy, tx = 0, ty = 0;
+  const wsImg = document.getElementById('wsImg');
+  wsImg.addEventListener('pointerdown', e => { isPan = true; sx = e.clientX - tx; sy = e.clientY - ty; wsImg.setPointerCapture(e.pointerId); });
+  wsImg.addEventListener('pointermove', e => { if (!isPan) return; tx = e.clientX - sx; ty = e.clientY - sy; wsImg.style.transform = `translate(${tx}px,${ty}px)`; });
+  wsImg.addEventListener('pointerup', () => { isPan = false; });
+
+  update();
+</script>
+</body>
+</html>
